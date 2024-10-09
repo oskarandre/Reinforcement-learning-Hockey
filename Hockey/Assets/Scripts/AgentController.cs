@@ -7,8 +7,11 @@ using Unity.MLAgents.Sensors;
 
 public class AgentMove : Agent
 {
-    [SerializeField] private Transform target;
-    [SerializeField] private float moveSpeed = 3f;
+    [SerializeField] private Transform puck;
+    [SerializeField] private Transform OwnGoal;
+    [SerializeField] private Transform OpponentGoal;
+    [SerializeField] private float moveSpeed = 100f;
+    [SerializeField] private float rotateSpeed = 100f;
 
     private Rigidbody rb;
 
@@ -20,7 +23,7 @@ public class AgentMove : Agent
     public override void OnEpisodeBegin()
     {
         transform.localPosition = new Vector3(10f, 5.3f, 0f);
-        target.localPosition = new Vector3(-7f, 3.5f, 0f);
+        puck.localPosition = new Vector3(-7f, 3.5f, 0f);
 
         //rotate the agent 90 degrees on the y-axis
         transform.rotation = Quaternion.Euler(0f, 90f, 0f);
@@ -40,7 +43,7 @@ public class AgentMove : Agent
             //float jump = actions.ContinuousActions[2];
 
             rb.MovePosition(transform.position + transform.forward * moveForward * moveSpeed * Time.fixedDeltaTime);
-            transform.Rotate(0f, moveRotate * moveSpeed, 0f, Space.Self);
+            transform.Rotate(0f, moveRotate * rotateSpeed, 0f, Space.Self);
             //rb.AddForce(Vector3.up * jump * 1f, ForceMode.Impulse);
 
 
@@ -61,14 +64,14 @@ public class AgentMove : Agent
     }
 
     private void OnTriggerEnter(Collider other)
-    {
+    {   
         if (other.gameObject.tag == "Puck")
         {
             AddReward(6f);
             EndEpisode();
         }
 
-        if (other.gameObject.tag == "Wall")
+        if (other.gameObject.tag == "Ice")
         {
             AddReward(-1f);
             EndEpisode();
