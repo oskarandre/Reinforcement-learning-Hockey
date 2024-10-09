@@ -20,11 +20,10 @@ public class AgentMove : Agent
     public override void OnEpisodeBegin()
     {
         transform.localPosition = new Vector3(10f, 5.3f, 0f);
-        target.localPosition = new Vector3(0f, 3.5f, 0f);
+        target.localPosition = new Vector3(-7f, 3.5f, 0f);
 
         //rotate the agent 90 degrees on the y-axis
         transform.rotation = Quaternion.Euler(0f, 90f, 0f);
-        
     }
 
     public override void CollectObservations(VectorSensor sensor)
