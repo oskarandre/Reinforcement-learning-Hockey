@@ -8,6 +8,7 @@ TagManager:
   - Puck
   - Stick
   - Goal
+  - Ice
   layers:
   - Default
   - TransparentFX

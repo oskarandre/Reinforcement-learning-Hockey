@@ -2411,7 +2411,9 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
-  target: {fileID: 438713696}
+  puck: {fileID: 0}
+  OwnGoal: {fileID: 0}
+  OpponentGoal: {fileID: 0}
   moveSpeed: 8
   rotateSpeed: 3
 --- !u!114 &1670656346
@@ -3329,6 +3331,10 @@ PrefabInstance:
     - target: {fileID: 3933901391501636182, guid: 1624b2341c3809d41ba4262d2710f417, type: 3}
       propertyPath: m_TagString
       value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 4067696626686915383, guid: 1624b2341c3809d41ba4262d2710f417, type: 3}
+      propertyPath: m_TagString
+      value: Ice
       objectReference: {fileID: 0}
     - target: {fileID: 4212053044338649599, guid: 1624b2341c3809d41ba4262d2710f417, type: 3}
       propertyPath: m_TagString
