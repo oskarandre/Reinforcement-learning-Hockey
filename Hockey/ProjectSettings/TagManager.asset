@@ -9,6 +9,8 @@ TagManager:
   - Stick
   - Goal
   - Ice
+  - OwnGoal
+  - OpponentGoal
   layers:
   - Default
   - TransparentFX

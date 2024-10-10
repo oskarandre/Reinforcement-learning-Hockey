@@ -27,6 +27,10 @@ public class AgentMove : Agent
 
         //rotate the agent 90 degrees on the y-axis
         transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+
+        //give the puck a starting velocity
+        puck.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 5f);
+
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -63,18 +67,37 @@ public class AgentMove : Agent
         }
     }
 
+
+
     private void OnTriggerEnter(Collider other)
     {   
-        if (other.gameObject.tag == "Puck")
+
+        if (other.TryGetComponent <Puck> (out Puck puck))
         {
-            AddReward(6f);
-            EndEpisode();
+            AddReward(3f);
         }
 
-        if (other.gameObject.tag == "Ice")
+        if (other.gameObject.tag == "Puck")
         {
-            AddReward(-1f);
-            EndEpisode();
+            AddReward(0.4f);
+        }
+
+        if (other.gameObject.tag == "Wall")
+        {
+            AddReward(-0.1f);
         }
     }
+
+    public void ScoredAGoal()
+    {
+        // We use a reward of 5.
+        AddReward(5f);
+
+        // By marking an agent as done AgentReset() will be called automatically.
+        EndEpisode();
+
+    }
+    
+
+
 }
