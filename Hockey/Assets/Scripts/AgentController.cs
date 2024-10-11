@@ -5,6 +5,7 @@ using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 
+
 public class AgentMove : Agent
 {
     [SerializeField] private Transform puck;
@@ -15,9 +16,14 @@ public class AgentMove : Agent
 
     private Rigidbody rb;
 
+    public GoalDetectWithInput goalDetect;
+
+
     public override void Initialize()
     {
         rb = GetComponent<Rigidbody>();
+        goalDetect = puck.GetComponent<GoalDetectWithInput>();
+        goalDetect.agent = this;
     }
 
     public override void OnEpisodeBegin()
@@ -29,7 +35,7 @@ public class AgentMove : Agent
         transform.rotation = Quaternion.Euler(0f, 90f, 0f);
 
         //give the puck a starting velocity
-        puck.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 5f);
+        //puck.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 5f);
 
     }
 
@@ -88,10 +94,9 @@ public class AgentMove : Agent
         }
     }
 
-    public void ScoredAGoal()
+    public void ScoredAGoal(float reward)
     {
-        // We use a reward of 5.
-        AddReward(5f);
+        AddReward(reward);
 
         // By marking an agent as done AgentReset() will be called automatically.
         EndEpisode();
