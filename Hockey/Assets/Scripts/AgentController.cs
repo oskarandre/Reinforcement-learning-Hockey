@@ -34,6 +34,17 @@ public class AgentMove : Agent
         //rotate the agent 90 degrees on the y-axis
         transform.rotation = Quaternion.Euler(0f, 90f, 0f);
 
+        //reset the rotation of puck
+        puck.rotation = Quaternion.Euler(0f, 0f, 0f);
+
+        //reset the velocity of the agent
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+        //reset the velocity of the puck
+        puck.GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+
         //give the puck a starting velocity
         //puck.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 5f);
 
@@ -72,25 +83,32 @@ public class AgentMove : Agent
             //continuousActions[2] = Input.GetAxis("Jump");
         }
     }
-
-
+ 
 
     private void OnTriggerEnter(Collider other)
     {   
 
-        if (other.TryGetComponent <Puck> (out Puck puck))
-        {
-            AddReward(3f);
+        // if (other.TryGetComponent <Puck> (out Puck puck))
+        // {
+        //     AddReward(3f);
+        // }
+
+        if (other.gameObject.tag == "Goal"){
+            AddReward(-0.1f);
+            EndEpisode();
         }
 
         if (other.gameObject.tag == "Puck")
         {
-            AddReward(0.4f);
+            Debug.Log("Puck detected");
+            AddReward(0.2f);
         }
 
         if (other.gameObject.tag == "Wall")
         {
+            Debug.Log("Wall detected");
             AddReward(-0.1f);
+            EndEpisode();
         }
     }
 
