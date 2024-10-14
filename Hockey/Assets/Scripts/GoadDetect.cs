@@ -49,7 +49,7 @@ public class GoalDetectWithInput : MonoBehaviour
     /// Don't need to manually set.
     /// </summary>
     [HideInInspector]
-    public AgentMove agent;  //
+    public AgentMove agent; 
 
     void OnCollisionEnter(Collision col)
     {

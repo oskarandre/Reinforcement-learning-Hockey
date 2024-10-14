@@ -9,8 +9,6 @@ using Unity.MLAgents.Sensors;
 public class AgentMove : Agent
 {
     [SerializeField] private Transform puck;
-    [SerializeField] private Transform OwnGoal;
-    [SerializeField] private Transform OpponentGoal;
     [SerializeField] private float moveSpeed = 100f;
     [SerializeField] private float rotateSpeed = 100f;
 
@@ -29,7 +27,9 @@ public class AgentMove : Agent
     public override void OnEpisodeBegin()
     {
         transform.localPosition = new Vector3(10f, 5.3f, 0f);
-        puck.localPosition = new Vector3(-7f, 3.5f, 0f);
+        
+        //random position for the puck
+        puck.localPosition = new Vector3(Random.Range(-5f, 1f), 3.5f, Random.Range(-2f, 4f));
 
         //rotate the agent 90 degrees on the y-axis
         transform.rotation = Quaternion.Euler(0f, 90f, 0f);
@@ -67,10 +67,7 @@ public class AgentMove : Agent
             transform.Rotate(0f, moveRotate * rotateSpeed, 0f, Space.Self);
             //rb.AddForce(Vector3.up * jump * 1f, ForceMode.Impulse);
 
-
-
             // transform.localPosition += new UnityEngine.Vector3(moveX, 0, moveZ) * Time.deltaTime * moveSpeed;
-        
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -100,27 +97,25 @@ public class AgentMove : Agent
 
         if (other.gameObject.tag == "Puck")
         {
-            Debug.Log("Puck detected");
-            AddReward(0.2f);
+            //Debug.Log("Puck detected");
+            AddReward(0.4f);
+            //EndEpisode();
         }
 
         if (other.gameObject.tag == "Wall")
         {
-            Debug.Log("Wall detected");
+            //Debug.Log("Wall detected");
             AddReward(-0.1f);
-            EndEpisode();
+            //EndEpisode();
         }
     }
 
     public void ScoredAGoal(float reward)
     {
         AddReward(reward);
-
         // By marking an agent as done AgentReset() will be called automatically.
         EndEpisode();
-
     }
+
     
-
-
 }
