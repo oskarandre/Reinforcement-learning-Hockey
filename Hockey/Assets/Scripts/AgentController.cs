@@ -29,7 +29,7 @@ public class AgentMove : Agent
         transform.localPosition = new Vector3(10f, 5.3f, 0f);
         
         //random position for the puck
-        puck.localPosition = new Vector3(Random.Range(-5f, 1f), 3.5f, Random.Range(-2f, 4f));
+        puck.localPosition = new Vector3(Random.Range(-5f, -2f), 3.5f, Random.Range(-1f, 3f));
 
         //rotate the agent 90 degrees on the y-axis
         transform.rotation = Quaternion.Euler(0f, 90f, 0f);
@@ -80,7 +80,12 @@ public class AgentMove : Agent
             //continuousActions[2] = Input.GetAxis("Jump");
         }
     }
- 
+
+    void Update()
+    {
+        AddReward(-0.0001f);
+        
+    }
 
     private void OnTriggerEnter(Collider other)
     {   
@@ -95,20 +100,21 @@ public class AgentMove : Agent
             EndEpisode();
         }
 
-        if (other.gameObject.tag == "Puck")
-        {
-            //Debug.Log("Puck detected");
-            AddReward(0.4f);
-            //EndEpisode();
-        }
+        // if (other.gameObject.tag == "Puck")
+        // {
+        //     //Debug.Log("Puck detected");
+        //     AddReward(0.1f);
+        //     //EndEpisode();
+        // }
 
         if (other.gameObject.tag == "Wall")
         {
             //Debug.Log("Wall detected");
-            AddReward(-0.1f);
-            //EndEpisode();
+            AddReward(-0.05f);
+            EndEpisode();
         }
     }
+
 
     public void ScoredAGoal(float reward)
     {

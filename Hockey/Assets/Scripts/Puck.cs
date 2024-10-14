@@ -37,10 +37,19 @@ public class Puck : MonoBehaviour
         
     }
 
+    private void OnTriggerEnter(Collider other){
+        if(other.CompareTag("Stick")){
+            //Debug.Log("Puck hit the stick");
+            agent.AddReward(0.2f);
+            //agent.EndEpisode();
+
+        }
+    }
+
     public void CalcReward(float distance)
     {
-        float maxstep = 500000f; // Define maxstep
-        float reward = (1f / maxstep) * 1f / (distance * distance);
+        float maxstep = 500f; // Define maxstep
+        float reward = (1f / maxstep) * (1f / (distance * distance));
 
         //Debug.Log("Reward: " + reward); 
 
