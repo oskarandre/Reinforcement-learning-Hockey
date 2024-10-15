@@ -40,8 +40,6 @@ public class AgentMove : Agent
             //random position for the puck
             puck.localPosition = new Vector3(Random.Range(0f, 4f), 3.5f, Random.Range(-2f, 3f));
 
-            steps = 0f;
-
         }
 
         if (stage1 == false) {
@@ -104,17 +102,15 @@ public class AgentMove : Agent
 
     void Update()
     {
-        AgentReward(-0.0001f, "Time");
-
-        float averageReward = GetCumulativeReward() / (float)StepCount;
+        AgentReward(-0.00001f, "Time");
         
-        if ( stage1 == true && steps > 100f) {
-            Debug.Log("Average Reward: " + averageReward);
-            EndEpisode();
-        }
+        //get average reward
+        //Debug.Log(GetCumulativeReward()); 
+
         steps += 1f;
 
-        if (averageReward > 0.7f && stage1 == true) {
+        if (steps > 100f && stage1 == true) {
+            Debug.Log("Stage 2");
             stage1 = false;
             stage2 = true;
         }
@@ -175,7 +171,7 @@ public class AgentMove : Agent
 
         if (stage2 == true) {
             if (type == "Stick"){
-            AddReward(reward*0.5f);
+            AddReward(reward*0.25f);
             }
             
             if (type == "Puck"){
