@@ -31,7 +31,7 @@ public class Puck : MonoBehaviour
         float distanceToOpponentGoal = Vector3.Distance(GoalPos, PuckPos);
 
         //normalize the distance
-        distanceToOpponentGoal = distanceToOpponentGoal / 15f;
+        //distanceToOpponentGoal = distanceToOpponentGoal / 15f;
 
         CalcReward(distanceToOpponentGoal);
         
@@ -43,14 +43,14 @@ public class Puck : MonoBehaviour
             //agent.AddReward(0.8f);
             //agent.EndEpisode();
 
-            agent.AgentReward(0.4f, "Stick");
+            agent.AgentReward(0.8f, "Stick");
 
         }
     }
 
     public void CalcReward(float distance)
     {
-        float maxstep = 300f; // Define maxstep
+        float maxstep = 500f; // Define maxstep
         float reward = (1f / maxstep) * (1f / (distance * distance));
 
         //Debug.Log("Reward: " + reward); 
