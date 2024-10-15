@@ -16,6 +16,14 @@ public class AgentMove : Agent
 
     public GoalDetectWithInput goalDetect;
 
+    public bool stage1 = true;
+    
+    public bool stage2 = false;
+
+    public bool stage3 = false;
+
+    public float steps = 0f;
+
 
     public override void Initialize()
     {
@@ -26,10 +34,23 @@ public class AgentMove : Agent
 
     public override void OnEpisodeBegin()
     {
-        transform.localPosition = new Vector3(10f, 5.3f, 0f);
+        if (stage1 == true) {
+            transform.localPosition = new Vector3(19f, 5.3f, 0f);
         
-        //random position for the puck
-        puck.localPosition = new Vector3(Random.Range(-5f, -2f), 3.5f, Random.Range(-1f, 3f));
+            //random position for the puck
+            puck.localPosition = new Vector3(Random.Range(0f, 4f), 3.5f, Random.Range(-2f, 3f));
+
+            steps = 0f;
+
+        }
+
+        if (stage1 == false) {
+
+            transform.localPosition = new Vector3(10f, 5.3f, 0f);
+        
+            //random position for the puck
+            puck.localPosition = new Vector3(Random.Range(-3f, 0f), 3.5f, Random.Range(-2f, 3f));
+        }
 
         //rotate the agent 90 degrees on the y-axis
         transform.rotation = Quaternion.Euler(0f, 90f, 0f);
@@ -83,7 +104,20 @@ public class AgentMove : Agent
 
     void Update()
     {
-        AddReward(-0.0001f);
+        AgentReward(-0.0001f, "Time");
+
+        float averageReward = GetCumulativeReward() / (float)StepCount;
+        
+        if ( stage1 == true && steps > 100f) {
+            Debug.Log("Average Reward: " + averageReward);
+            EndEpisode();
+        }
+        steps += 1f;
+
+        if (averageReward > 0.7f && stage1 == true) {
+            stage1 = false;
+            stage2 = true;
+        }
         
     }
 
@@ -94,6 +128,8 @@ public class AgentMove : Agent
         // {
         //     AddReward(3f);
         // }
+
+        
 
         if (other.gameObject.tag == "Goal"){
             AddReward(-0.1f);
@@ -121,6 +157,35 @@ public class AgentMove : Agent
         AddReward(reward);
         // By marking an agent as done AgentReset() will be called automatically.
         EndEpisode();
+    }
+
+    public void AgentReward(float reward, string type){
+
+        if (stage1 == true) {
+            if (type == "Stick"){
+            AddReward(reward);
+            EndEpisode();
+            }
+
+            if (type == "Time"){
+            AddReward(reward);
+            }
+
+        }
+
+        if (stage2 == true) {
+            if (type == "Stick"){
+            AddReward(reward*0.5f);
+            }
+            
+            if (type == "Puck"){
+            AddReward(reward);
+            }
+
+            if (type == "Time"){
+            AddReward(reward*2f);
+            }
+        }
     }
 
     
