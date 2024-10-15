@@ -16,13 +16,9 @@ public class AgentMove : Agent
 
     public GoalDetectWithInput goalDetect;
 
-    public bool stage1 = true;
+    public bool stage1 = false;
     
-    public bool stage2 = false;
-
-    public bool stage3 = false;
-
-    public float steps = 0f;
+    public bool stage2 = true;
 
 
     public override void Initialize()
@@ -42,7 +38,7 @@ public class AgentMove : Agent
 
         }
 
-        if (stage1 == false) {
+        if (stage2 == true) {
 
             transform.localPosition = new Vector3(10f, 5.3f, 0f);
         
@@ -106,14 +102,6 @@ public class AgentMove : Agent
         
         //get average reward
         //Debug.Log(GetCumulativeReward()); 
-
-        steps += 1f;
-
-        if (steps > 100f && stage1 == true) {
-            Debug.Log("Stage 2");
-            stage1 = false;
-            stage2 = true;
-        }
         
     }
 
@@ -157,17 +145,17 @@ public class AgentMove : Agent
 
     public void AgentReward(float reward, string type){
 
-        if (stage1 == true) {
-            if (type == "Stick"){
-            AddReward(reward);
-            EndEpisode();
-            }
+        // if (stage1 == true) {
+        //     if (type == "Stick"){
+        //     AddReward(reward);
+        //     EndEpisode();
+        //     }
 
-            if (type == "Time"){
-            AddReward(reward);
-            }
+        //     if (type == "Time"){
+        //     AddReward(reward);
+        //     }
 
-        }
+        // }
 
         if (stage2 == true) {
             if (type == "Stick"){
