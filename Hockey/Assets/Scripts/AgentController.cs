@@ -22,7 +22,7 @@ public class AgentMove : Agent
 
     public bool stage3 = false;
 
-    public float steps = 0f;
+    private float resetTimer = 0f;
 
 
     public override void Initialize()
@@ -35,19 +35,19 @@ public class AgentMove : Agent
     public override void OnEpisodeBegin()
     {
         if (stage1 == true) {
-            transform.localPosition = new Vector3(19f, 5.3f, 0f);
+            transform.localPosition = new Vector3(Random.Range(10f,19f), 5.3f, Random.Range(-1f, 1f));
         
             //random position for the puck
-            puck.localPosition = new Vector3(Random.Range(0f, 4f), 3.5f, Random.Range(-2f, 3f));
+            puck.localPosition = new Vector3(Random.Range(-7f, 4f), 3.5f, Random.Range(-2f, 3f));
 
         }
 
-        if (stage1 == false) {
+        if (stage2 == true) {
 
-            transform.localPosition = new Vector3(10f, 5.3f, 0f);
+            transform.localPosition = new Vector3(Random.Range(10f,19f), 5.3f, Random.Range(-1f, 1f));
         
             //random position for the puck
-            puck.localPosition = new Vector3(Random.Range(-3f, 0f), 3.5f, Random.Range(-2f, 3f));
+            puck.localPosition = new Vector3(Random.Range(-7f, 4f), 3.5f, Random.Range(-2f, 3f));
         }
 
         //rotate the agent 90 degrees on the y-axis
@@ -99,26 +99,26 @@ public class AgentMove : Agent
     }
 
 
-    void FixedUpdate()
-{
-        float moveRotate = Input.GetAxis("Horizontal");
-        float moveForward = Input.GetAxis("Vertical");
-            //float jump = actions.ContinuousActions[2];
+//     void FixedUpdate()
+// {
+//         float moveRotate = Input.GetAxis("Horizontal");
+//         float moveForward = Input.GetAxis("Vertical");
+//             //float jump = actions.ContinuousActions[2];
 
-            //rb.MovePosition(transform.position + transform.forward * moveForward * moveSpeed * Time.fixedDeltaTime);
-            //transform.Rotate(0f, moveRotate * rotateSpeed, 0f, Space.Self);
-            //rb.AddForce(Vector3.up * jump * 1f, ForceMode.Impulse);
+//             //rb.MovePosition(transform.position + transform.forward * moveForward * moveSpeed * Time.fixedDeltaTime);
+//             //transform.Rotate(0f, moveRotate * rotateSpeed, 0f, Space.Self);
+//             //rb.AddForce(Vector3.up * jump * 1f, ForceMode.Impulse);
 
-            // transform.localPosition += new UnityEngine.Vector3(moveX, 0, moveZ) * Time.deltaTime * moveSpeed;
+//             // transform.localPosition += new UnityEngine.Vector3(moveX, 0, moveZ) * Time.deltaTime * moveSpeed;
 
-            // Apply force for movement
-        Vector3 moveForce = transform.forward * moveForward * moveSpeed;
-        rb.AddForce(moveForce);
+//             // Apply force for movement
+//         Vector3 moveForce = transform.forward * moveForward * moveSpeed;
+//         rb.AddForce(moveForce);
 
-            // Apply torque for rotation
-        float torque = moveRotate * rotateSpeed;
-        rb.AddTorque(Vector3.up * torque);
-}
+//             // Apply torque for rotation
+//         float torque = moveRotate * rotateSpeed;
+//         rb.AddTorque(Vector3.up * torque);
+// }
 
     public override void Heuristic(in ActionBuffers actionsOut)
     {
@@ -133,19 +133,33 @@ public class AgentMove : Agent
 
     void Update()
     {
-        AgentReward(-0.00001f, "Time");
-        
-        //get average reward
-        //Debug.Log(GetCumulativeReward()); 
+        AgentReward(-0.00025f, "Time");
+        Debug.Log(rb.velocity.magnitude);
 
-        steps += 1f;
+        if (rb.velocity.magnitude < 0.01f){
+            AddReward(-0.0025f);
+            resetTimer += 0.0025f;
 
-        if (steps > 100f && stage1 == true) {
-            Debug.Log("Stage 2");
-            stage1 = false;
-            stage2 = true;
         }
-        
+
+        if( puck.GetComponent<Rigidbody>().velocity.magnitude == 0f){
+            AddReward(-0.005f);
+        }
+
+        if (resetTimer > 0.5f){
+            resetTimer = 0f;
+            EndEpisode();
+        }
+
+    
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Wall"){
+            AddReward(-0.001f);
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -163,6 +177,16 @@ public class AgentMove : Agent
             EndEpisode();
         }
 
+        if (other.gameObject.tag == "OwnGoal"){
+            AddReward(-0.1f);
+            EndEpisode();
+        }
+
+        if (other.gameObject.tag == "OpponentGoal"){
+            AddReward(-0.1f);
+            EndEpisode();
+        }
+
         // if (other.gameObject.tag == "Puck")
         // {
         //     //Debug.Log("Puck detected");
@@ -170,12 +194,11 @@ public class AgentMove : Agent
         //     //EndEpisode();
         // }
 
-        if (other.gameObject.tag == "Wall")
-        {
-            //Debug.Log("Wall detected");
-            AddReward(-0.05f);
-            EndEpisode();
-        }
+        // if (other.gameObject.tag == "Wall")
+        // {
+        //     AddReward(-0.05f);
+        //     //EndEpisode();
+        // }
     }
 
 

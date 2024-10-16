@@ -10,7 +10,9 @@ public class Puck : MonoBehaviour
 
     public AgentMove agent; 
 
+    private float tick = 0f;
 
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -28,34 +30,42 @@ public class Puck : MonoBehaviour
         Vector3 GoalPos = OpponentGoal.position;
         Vector3 PuckPos = transform.position;
 
+
         float distanceToOpponentGoal = Vector3.Distance(GoalPos, PuckPos);
 
         //normalize the distance
         //distanceToOpponentGoal = distanceToOpponentGoal / 15f;
 
-        CalcReward(distanceToOpponentGoal);
+        CalcReward(distanceToOpponentGoal);        
+        
+
+        //tick += 1f;
         
     }
 
     private void OnTriggerEnter(Collider other){
-        if(other.CompareTag("Stick")){
-            //Debug.Log("Puck hit the stick");
-            //agent.AddReward(0.8f);
-            //agent.EndEpisode();
 
-            agent.AgentReward(0.8f, "Stick");
+        if(other.CompareTag("Stick")){
+            agent.AgentReward(0.4f, "Stick");
 
         }
     }
 
     public void CalcReward(float distance)
     {
-        float maxstep = 500f; // Define maxstep
-        float reward = (1f / maxstep) * (1f / (distance * distance));
+        float PuckVelocity = GetComponent<Rigidbody>().velocity.magnitude;
 
-        //Debug.Log("Reward: " + reward); 
+        //Debug.Log("Puck Velocity: " + PuckVelocity);
 
-        agent.AgentReward(reward, "Puck");
+        if (PuckVelocity > 0f){
+            float maxstep = 500f; // Define maxstep
+            float reward = (1f / maxstep) * (1f / (distance * distance));
+
+            //Debug.Log("Reward: " + reward); 
+
+            agent.AgentReward(reward, "Puck");
+        }
+        
     }
 
 
