@@ -9,10 +9,10 @@ using Unity.MLAgents.Sensors;
 public class AgentMove : Agent
 {
     [SerializeField] private Transform puck;
-    [SerializeField] private float moveSpeed = 100f;
-    [SerializeField] private float rotateSpeed = 100f;
+    [SerializeField] private float moveSpeed = 1000f;
+    [SerializeField] private float rotateSpeed = 500f;
 
-    private Rigidbody rb;
+    public Rigidbody rb;
 
     public GoalDetectWithInput goalDetect;
 
@@ -82,12 +82,43 @@ public class AgentMove : Agent
             float moveForward = actions.ContinuousActions[1];
             //float jump = actions.ContinuousActions[2];
 
-            rb.MovePosition(transform.position + transform.forward * moveForward * moveSpeed * Time.fixedDeltaTime);
-            transform.Rotate(0f, moveRotate * rotateSpeed, 0f, Space.Self);
+            //rb.MovePosition(transform.position + transform.forward * moveForward * moveSpeed * Time.fixedDeltaTime);
+            //transform.Rotate(0f, moveRotate * rotateSpeed, 0f, Space.Self);
             //rb.AddForce(Vector3.up * jump * 1f, ForceMode.Impulse);
 
             // transform.localPosition += new UnityEngine.Vector3(moveX, 0, moveZ) * Time.deltaTime * moveSpeed;
+
+            // Apply force for movement
+            Vector3 moveForce = transform.forward * moveForward * moveSpeed;
+            rb.AddForce(moveForce);
+
+            // Apply torque for rotation
+            float torque = moveRotate * rotateSpeed;
+            rb.AddTorque(Vector3.up * torque);
+
     }
+
+
+    void FixedUpdate()
+{
+        float moveRotate = Input.GetAxis("Horizontal");
+        float moveForward = Input.GetAxis("Vertical");
+            //float jump = actions.ContinuousActions[2];
+
+            //rb.MovePosition(transform.position + transform.forward * moveForward * moveSpeed * Time.fixedDeltaTime);
+            //transform.Rotate(0f, moveRotate * rotateSpeed, 0f, Space.Self);
+            //rb.AddForce(Vector3.up * jump * 1f, ForceMode.Impulse);
+
+            // transform.localPosition += new UnityEngine.Vector3(moveX, 0, moveZ) * Time.deltaTime * moveSpeed;
+
+            // Apply force for movement
+        Vector3 moveForce = transform.forward * moveForward * moveSpeed;
+        rb.AddForce(moveForce);
+
+            // Apply torque for rotation
+        float torque = moveRotate * rotateSpeed;
+        rb.AddTorque(Vector3.up * torque);
+}
 
     public override void Heuristic(in ActionBuffers actionsOut)
     {
