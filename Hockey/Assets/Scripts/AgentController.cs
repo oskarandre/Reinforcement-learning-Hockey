@@ -64,7 +64,7 @@ public class AgentMove : Agent
         puck.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
 
-        //give the puck a starting velocity
+        //give the puck a starting velocity (debugging)
         //puck.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 5f);
 
     }
@@ -72,22 +72,14 @@ public class AgentMove : Agent
     public override void CollectObservations(VectorSensor sensor)
     {
         sensor.AddObservation(transform.localPosition);
-        //sensor.AddObservation(target.localPosition);
+        sensor.AddObservation(puck.localPosition);
     }
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        
             float moveRotate = actions.ContinuousActions[0];
             float moveForward = actions.ContinuousActions[1];
-            //float jump = actions.ContinuousActions[2];
-
-            //rb.MovePosition(transform.position + transform.forward * moveForward * moveSpeed * Time.fixedDeltaTime);
-            //transform.Rotate(0f, moveRotate * rotateSpeed, 0f, Space.Self);
-            //rb.AddForce(Vector3.up * jump * 1f, ForceMode.Impulse);
-
-            // transform.localPosition += new UnityEngine.Vector3(moveX, 0, moveZ) * Time.deltaTime * moveSpeed;
-
+            
             // Apply force for movement
             Vector3 moveForce = transform.forward * moveForward * moveSpeed;
             rb.AddForce(moveForce);
@@ -95,30 +87,7 @@ public class AgentMove : Agent
             // Apply torque for rotation
             float torque = moveRotate * rotateSpeed;
             rb.AddTorque(Vector3.up * torque);
-
     }
-
-
-//     void FixedUpdate()
-// {
-//         float moveRotate = Input.GetAxis("Horizontal");
-//         float moveForward = Input.GetAxis("Vertical");
-//             //float jump = actions.ContinuousActions[2];
-
-//             //rb.MovePosition(transform.position + transform.forward * moveForward * moveSpeed * Time.fixedDeltaTime);
-//             //transform.Rotate(0f, moveRotate * rotateSpeed, 0f, Space.Self);
-//             //rb.AddForce(Vector3.up * jump * 1f, ForceMode.Impulse);
-
-//             // transform.localPosition += new UnityEngine.Vector3(moveX, 0, moveZ) * Time.deltaTime * moveSpeed;
-
-//             // Apply force for movement
-//         Vector3 moveForce = transform.forward * moveForward * moveSpeed;
-//         rb.AddForce(moveForce);
-
-//             // Apply torque for rotation
-//         float torque = moveRotate * rotateSpeed;
-//         rb.AddTorque(Vector3.up * torque);
-// }
 
     public override void Heuristic(in ActionBuffers actionsOut)
     {
@@ -133,20 +102,19 @@ public class AgentMove : Agent
 
     void Update()
     {
-        AgentReward(-0.00025f, "Time");
-        Debug.Log(rb.velocity.magnitude);
+        AgentReward(-0.025f, "Time");
 
         if (rb.velocity.magnitude < 0.01f){
-            AddReward(-0.0025f);
+            //AddReward(-0.0025f);
             resetTimer += 0.0025f;
 
         }
 
-        if( puck.GetComponent<Rigidbody>().velocity.magnitude == 0f){
-            AddReward(-0.005f);
-        }
+        // if( puck.GetComponent<Rigidbody>().velocity.magnitude == 0f){
+        //     AddReward(-0.005f);
+        // }
 
-        if (resetTimer > 0.5f){
+        if (resetTimer > 0.9f){
             resetTimer = 0f;
             EndEpisode();
         }
@@ -170,8 +138,6 @@ public class AgentMove : Agent
         //     AddReward(3f);
         // }
 
-        
-
         if (other.gameObject.tag == "Goal"){
             AddReward(-0.1f);
             EndEpisode();
@@ -190,8 +156,8 @@ public class AgentMove : Agent
         // if (other.gameObject.tag == "Puck")
         // {
         //     //Debug.Log("Puck detected");
-        //     AddReward(0.1f);
-        //     //EndEpisode();
+        //     AddReward(1f);
+        //     EndEpisode();
         // }
 
         // if (other.gameObject.tag == "Wall")
@@ -205,6 +171,7 @@ public class AgentMove : Agent
     public void ScoredAGoal(float reward)
     {
         AddReward(reward);
+        //Debug.Log("Goal Scored! " + reward);
         // By marking an agent as done AgentReset() will be called automatically.
         EndEpisode();
     }
@@ -213,27 +180,23 @@ public class AgentMove : Agent
 
         if (stage1 == true) {
             if (type == "Stick"){
-            AddReward(reward);
-            EndEpisode();
+                AddReward(reward);
+                //EndEpisode();
             }
-
             if (type == "Time"){
-            AddReward(reward);
+                AddReward(reward);
             }
-
         }
 
         if (stage2 == true) {
             if (type == "Stick"){
-            AddReward(reward*0.25f);
+                AddReward(reward*0.25f);
             }
-            
             if (type == "Puck"){
-            AddReward(reward);
+                AddReward(reward);
             }
-
             if (type == "Time"){
-            AddReward(reward*2f);
+                AddReward(reward*2f);
             }
         }
     }

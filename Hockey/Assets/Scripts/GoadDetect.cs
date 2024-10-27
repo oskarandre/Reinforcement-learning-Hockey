@@ -56,11 +56,13 @@ public class GoalDetectWithInput : MonoBehaviour
         // Touched goal.
         if (col.gameObject.CompareTag("OpponentGoal"))
         {
-            agent.ScoredAGoal(reward: 1f);
+            agent.ScoredAGoal(1f);
+            //Debug.Log("Scored");
         }
         else if (col.gameObject.CompareTag("OwnGoal"))
         {
-            agent.ScoredAGoal(reward: -1f);
+            agent.ScoredAGoal(-1f);
+            //Debug.Log("Own goal u fukking loser");
         }
     }
 }

@@ -9,7 +9,7 @@ public class Puck : MonoBehaviour
     [SerializeField] private Transform OpponentGoal;
 
     public AgentMove agent; 
-
+    public float maxstep = 500f; // Define maxstep
     private float tick = 0f;
 
     
@@ -17,28 +17,32 @@ public class Puck : MonoBehaviour
     void Start()
     {
         
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        //the closer the puck is to the goal, the higher the reward
-
-        //if the puck is closer to the opponent's goal, give a positive reward
-        //if the puck is closer to the agent's goal, give a negative reward
-
+        Vector3 Stick_pos = agent.transform.GetChild(6).transform.position;
         Vector3 GoalPos = OpponentGoal.position;
         Vector3 PuckPos = transform.position;
 
+        CalcReward_RB_to_POS(GoalPos, GetComponent<Rigidbody>()); 
+        CalcReward_RB_to_POS(PuckPos, agent.GetComponent<Rigidbody>());
+        
+        //CalcReward_Puck_to_Goal(PuckPos, agent.GetComponent<Rigidbody>().transform.position);
 
-        float distanceToOpponentGoal = Vector3.Distance(GoalPos, PuckPos);
-
+        //the closer the puck is to the goal, the higher the reward
+    
+        // Reward based on Velocity of puck in relation to direction of opponentGoal
+        
         //normalize the distance
         //distanceToOpponentGoal = distanceToOpponentGoal / 15f;
 
-        CalcReward(distanceToOpponentGoal);        
-        
+        float puck_oppgoal_distance = Vector3.Distance(GoalPos,  PuckPos);
 
+        //CalcReward(puck_oppgoal_distance);    
+           
         //tick += 1f;
         
     }
@@ -46,9 +50,27 @@ public class Puck : MonoBehaviour
     private void OnTriggerEnter(Collider other){
 
         if(other.CompareTag("Stick")){
-            agent.AgentReward(0.4f, "Stick");
-
+            agent.AgentReward(0.1f, "Stick");
         }
+    }
+//*************************** CALCULATE REWARD FUNCTIONS PUCK ************************************
+
+    // Try adding method which takes into account the angle of the velocity vector instead?
+
+    // Method to calculate velocity of rigidbody in direction of position, + reward/penalty
+    public void CalcReward_RB_to_POS(Vector3 position, Rigidbody rigidbody) {
+       
+        Vector3 RB_POS_direction = (position - rigidbody.transform.position).normalized;
+
+        //float v_dir = Vector3.Dot(rigidbody.GetPointVelocity(agent.transform.GetChild(6).transform.position), RB_POS_direction); // velocity of stick
+        float v_dir = Vector3.Dot(rigidbody.velocity, RB_POS_direction); //changed to rigidbody.velocity for puck
+        if(v_dir > 1f) {
+            agent.AddReward(0.1f); 
+            //Debug.Log("Added reward of " + (v_dir));
+        }
+        
+        //agent.AddReward(v_dir/maxstep); // if v_dir > 0 reward is positive, else negative reward because puck is stuck or travels in wrong direction. 
+        //Debug.Log("Added reward of " + (v_dir/maxstep));
     }
 
     public void CalcReward(float distance)
@@ -58,7 +80,6 @@ public class Puck : MonoBehaviour
         //Debug.Log("Puck Velocity: " + PuckVelocity);
 
         if (PuckVelocity > 0f){
-            float maxstep = 500f; // Define maxstep
             float reward = (1f / maxstep) * (1f / (distance * distance));
 
             //Debug.Log("Reward: " + reward); 
