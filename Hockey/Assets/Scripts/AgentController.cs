@@ -125,7 +125,8 @@ public class AgentMove : Agent
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Wall"){
-            AddReward(-0.001f);
+            AddReward(-0.1f);
+            EndEpisode();
         }
 
     }
