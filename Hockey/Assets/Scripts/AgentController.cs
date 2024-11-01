@@ -114,15 +114,16 @@ public class AgentMove : Agent
         //     AddReward(-0.005f);
         // }
 
-        if (resetTimer > 0.9f){
+        if (resetTimer > 109f){ // set 0.9
             resetTimer = 0f;
+            SetReward(-1f);
             EndEpisode();
         }
 
     
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerStay(Collider other) //TODO: test and compare ending episode with wall touch + setReward with Endepisode
     {
         if (other.gameObject.tag == "Wall"){
             AddReward(-0.1f);
@@ -140,17 +141,20 @@ public class AgentMove : Agent
         // }
 
         if (other.gameObject.tag == "Goal"){
-            AddReward(-0.1f);
+            //AddReward(-0.1f);
+            SetReward(-1f);
             EndEpisode();
         }
 
         if (other.gameObject.tag == "OwnGoal"){
-            AddReward(-0.1f);
+            //AddReward(-0.1f);
+            SetReward(-1f);
             EndEpisode();
         }
 
         if (other.gameObject.tag == "OpponentGoal"){
-            AddReward(-0.1f);
+            //AddReward(-0.1f);
+            SetReward(-1f);
             EndEpisode();
         }
 
@@ -171,7 +175,8 @@ public class AgentMove : Agent
 
     public void ScoredAGoal(float reward)
     {
-        AddReward(reward);
+        //AddReward(reward);
+        SetReward(reward);
         //Debug.Log("Goal Scored! " + reward);
         // By marking an agent as done AgentReset() will be called automatically.
         EndEpisode();
