@@ -1,0 +1,29 @@
+{
+    "AgentController": {
+        "checkpoints": [
+            {
+                "steps": 121600,
+                "file_path": "results\\RetrainBigGoal1\\AgentController\\AgentController-121600.onnx",
+                "reward": null,
+                "creation_time": 1730456033.9891317,
+                "auxillary_file_paths": [
+                    "results\\RetrainBigGoal1\\AgentController\\AgentController-121600.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 121600,
+            "file_path": "results\\RetrainBigGoal1\\AgentController.onnx",
+            "reward": null,
+            "creation_time": 1730456033.9891317,
+            "auxillary_file_paths": [
+                "results\\RetrainBigGoal1\\AgentController\\AgentController-121600.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.4.1+cpu"
+    }
+}

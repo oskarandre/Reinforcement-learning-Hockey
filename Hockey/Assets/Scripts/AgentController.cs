@@ -14,6 +14,8 @@ public class AgentMove : Agent
 
     public Rigidbody rb;
 
+    public Rigidbody puckRB;
+
     public GoalDetectWithInput goalDetect;
 
     public bool stage1 = true;
@@ -28,6 +30,7 @@ public class AgentMove : Agent
     public override void Initialize()
     {
         rb = GetComponent<Rigidbody>();
+        puckRB = puck.GetComponent<Rigidbody>(); 
         goalDetect = puck.GetComponent<GoalDetectWithInput>();
         goalDetect.agent = this;
     }
@@ -35,10 +38,15 @@ public class AgentMove : Agent
     public override void OnEpisodeBegin()
     {
         if (stage1 == true) {
-            transform.localPosition = new Vector3(Random.Range(10f,19f), 5.3f, Random.Range(-1f, 1f));
+            transform.localPosition = new Vector3(Random.Range(20f,25f), 5.3f, Random.Range(-1f, 1f));
         
             //random position for the puck
-            puck.localPosition = new Vector3(Random.Range(-7f, 4f), 3.5f, Random.Range(-2f, 3f));
+            puck.localPosition = new Vector3(Random.Range(2f, 4f), 3.5f, Random.Range(-2f, 3f));
+
+            // transform.localPosition = new Vector3(Random.Range(15f,17f), 5.3f, Random.Range(-1f, 1f));
+        
+            // //random position for the puck
+            // puck.localPosition = new Vector3(Random.Range(-2f, 2f), 3.5f, Random.Range(-2f, 3f));
 
         }
 
@@ -67,12 +75,6 @@ public class AgentMove : Agent
         //give the puck a starting velocity (debugging)
         //puck.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 5f);
 
-    }
-
-    public override void CollectObservations(VectorSensor sensor)
-    {
-        sensor.AddObservation(transform.localPosition);
-        sensor.AddObservation(puck.localPosition);
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -104,29 +106,34 @@ public class AgentMove : Agent
     {
         AgentReward(-0.025f, "Time");
 
-        if (rb.velocity.magnitude < 0.01f){
+        if (puckRB.velocity.magnitude < 0.01f){
             //AddReward(-0.0025f);
-            resetTimer += 0.0025f;
-
+            resetTimer += 0.005f;
         }
-
-        // if( puck.GetComponent<Rigidbody>().velocity.magnitude == 0f){
-        //     AddReward(-0.005f);
-        // }
 
         if (resetTimer > 0.9f){
             resetTimer = 0f;
             EndEpisode();
         }
 
-    
     }
 
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Wall"){
+            AddReward(-0.05f);
+            //EndEpisode();
+            //Debug.Log("Wall detected");
+        }
+
+        if (other.gameObject.tag == "OwnGoal"){
             AddReward(-0.1f);
-            EndEpisode();
+            //EndEpisode();
+        }
+
+        if (other.gameObject.tag == "OpponentGoal"){
+            AddReward(-0.1f);
+            //EndEpisode();
         }
 
     }
@@ -141,18 +148,10 @@ public class AgentMove : Agent
 
         if (other.gameObject.tag == "Goal"){
             AddReward(-0.1f);
-            EndEpisode();
+            //EndEpisode();
         }
 
-        if (other.gameObject.tag == "OwnGoal"){
-            AddReward(-0.1f);
-            EndEpisode();
-        }
-
-        if (other.gameObject.tag == "OpponentGoal"){
-            AddReward(-0.1f);
-            EndEpisode();
-        }
+        
 
         // if (other.gameObject.tag == "Puck")
         // {
