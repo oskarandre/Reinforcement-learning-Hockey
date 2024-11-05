@@ -38,7 +38,7 @@ public class AgentMove : Agent
     public override void OnEpisodeBegin()
     {
         if (stage1 == true) {
-            transform.localPosition = new Vector3(Random.Range(20f,25f), 5.3f, Random.Range(-1f, 1f));
+            transform.localPosition = new Vector3(Random.Range(15f,22f), 5.3f, Random.Range(-2f, 2f));
         
             //random position for the puck
             puck.localPosition = new Vector3(Random.Range(2f, 4f), 3.5f, Random.Range(-2f, 3f));
@@ -108,7 +108,7 @@ public class AgentMove : Agent
 
         if (puckRB.velocity.magnitude < 0.01f){
             //AddReward(-0.0025f);
-            resetTimer += 0.005f;
+            resetTimer += 0.0003f;
         }
 
         if (resetTimer > 0.9f){
@@ -121,18 +121,18 @@ public class AgentMove : Agent
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Wall"){
-            AddReward(-0.05f);
+            AddReward(-0.01f);
             //EndEpisode();
             //Debug.Log("Wall detected");
         }
 
         if (other.gameObject.tag == "OwnGoal"){
-            AddReward(-0.1f);
+            AddReward(-0.01f);
             //EndEpisode();
         }
 
         if (other.gameObject.tag == "OpponentGoal"){
-            AddReward(-0.1f);
+            AddReward(-0.01f);
             //EndEpisode();
         }
 
