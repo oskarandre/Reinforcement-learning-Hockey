@@ -38,10 +38,10 @@ public class AgentMove : Agent
     public override void OnEpisodeBegin()
     {
         if (stage1 == true) {
-            transform.localPosition = new Vector3(Random.Range(15f,22f), 5.3f, Random.Range(-2f, 2f));
+            transform.localPosition = new Vector3(Random.Range(12f,15f), 5.3f, Random.Range(-2f, 5f));
         
             //random position for the puck
-            puck.localPosition = new Vector3(Random.Range(2f, 4f), 3.5f, Random.Range(-2f, 3f));
+            puck.localPosition = new Vector3(Random.Range(1f, 5f), 3.5f, Random.Range(-0.5f, 2f));
 
             // transform.localPosition = new Vector3(Random.Range(15f,17f), 5.3f, Random.Range(-1f, 1f));
         
@@ -108,7 +108,7 @@ public class AgentMove : Agent
 
         if (puckRB.velocity.magnitude < 0.01f){
             //AddReward(-0.0025f);
-            resetTimer += 0.0003f;
+            resetTimer += 0.001f;
         }
 
         if (resetTimer > 0.9f){
