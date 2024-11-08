@@ -42,12 +42,11 @@ public class AgentMove : Agent
             puck.localPosition = new Vector3(Random.Range(-7f, 4f), 3.5f, Random.Range(-2f, 3f));
 
         }
-
         //rotate the agent 90 degrees on the y-axis
-        transform.rotation = Quaternion.Euler(0f, 90f, 0f); //TODO: randomize rotation of agent?
+        rb.rotation = Quaternion.identity;
 
         //reset the rotation of puck
-        puck.rotation = Quaternion.Euler(0f, 0f, 0f);
+        puck.rotation = Quaternion.identity;
 
         //reset the velocity of the agent
         rb.velocity = Vector3.zero;
@@ -92,39 +91,14 @@ public class AgentMove : Agent
 
     void FixedUpdate()
     {
-        //AgentReward(-1/500000f, "Time");
-
         timepenalty += 1/500000f;
-        /*
-        if (puck.GetComponent<Rigidbody>().velocity.magnitude < 0.01f){ //puck.GetComponent<Rigidbody>().velocity.magnitude must be > 1.3
-            //AddReward(-0.0025f);
-            resetTimer += 0.0025f;
-        }
-
-        if (resetTimer > 8f){ // set ca 0.9
-            resetTimer = 0f;
-            SetReward(-1 -timepenalty);
-            EndEpisode();
-        }
-        */
+      
         if(puck.GetComponent<Rigidbody>().position.y < 2f) { // fix for case of puck flying of map
             SetReward(-1);
             EndEpisode();
-        
         }
-
-    
     }
 
-    private void OnTriggerStay(Collider other) //TODO: test and compare ending episode with wall touch + setReward with Endepisode
-    {
-        if (other.gameObject.tag == "Wall" && rb.velocity.magnitude < 2.0f){
-            AddReward(-1/500000f);
-            Debug.Log("WallFucking present!!! "+ -1/500000f);
-            //EndEpisode();
-        }
-
-    }
 
     private void OnTriggerEnter(Collider other)
     {   
@@ -147,17 +121,17 @@ public class AgentMove : Agent
             EndEpisode();
         }
 
-        // if (other.gameObject.tag == "Puck")
-        // {
-        //     Debug.Log("Puck detected");
-        //     AddReward(0.1f);
-        // }
+      /*   if (other.gameObject.tag == "Puck")
+        {
+            Debug.Log("Puck detected");
+            AddReward(0.1f);
+        }
 
-        // if (other.gameObject.tag == "Wall")
-        // {
-        //     AddReward(-0.05f);
-        //     //EndEpisode();
-        // }
+        if (other.gameObject.tag == "Wall")
+        {
+            AddReward(-0.05f);
+            //EndEpisode();
+        } */
     }
 
     public void ScoredAGoal(float reward) {
