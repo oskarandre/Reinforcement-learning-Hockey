@@ -127,7 +127,7 @@ public class AgentMove : Agent
         //     resetTimer += 0.002f;
         // }
 
-        if (resetTimer > 1f){
+        if (resetTimer > 10f){
             SetReward(-1f);
             EndEpisode();
         }
