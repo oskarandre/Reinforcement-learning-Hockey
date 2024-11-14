@@ -39,7 +39,7 @@ public class AgentMove : Agent
     {
         if (stage1 == true) {
 
-            var playerPosition = Random.Range(0, 2);
+            var playerPosition = Random.Range(0, 4);
 
             if (playerPosition == 0){
                 transform.localPosition = new Vector3(Random.Range(23f,25f), 5.3f, Random.Range(0f, 4f));
@@ -117,9 +117,9 @@ public class AgentMove : Agent
 
     void Update()
     {
-        AgentReward(-0.0007f, "Time");
+        AgentReward(-0.0002f, "Time");
 
-        resetTimer += 0.0007f;
+        resetTimer += 0.0002f;
 
 
         // if (puckRB.velocity.magnitude < 0.01f && rb.velocity.magnitude < 0.01f){
@@ -127,7 +127,7 @@ public class AgentMove : Agent
         //     resetTimer += 0.002f;
         // }
 
-        if (resetTimer > 10f){
+        if (resetTimer > 1f){
             SetReward(-1f);
             EndEpisode();
         }
