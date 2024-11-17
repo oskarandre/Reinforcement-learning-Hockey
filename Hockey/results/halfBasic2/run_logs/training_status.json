@@ -1,0 +1,65 @@
+{
+    "AgentController": {
+        "checkpoints": [
+            {
+                "steps": 3499966,
+                "file_path": "results\\halfBasic2\\AgentController\\AgentController-3499966.onnx",
+                "reward": 1.4235001101213343,
+                "creation_time": 1731869087.0103865,
+                "auxillary_file_paths": [
+                    "results\\halfBasic2\\AgentController\\AgentController-3499966.pt"
+                ]
+            },
+            {
+                "steps": 3999968,
+                "file_path": "results\\halfBasic2\\AgentController\\AgentController-3999968.onnx",
+                "reward": 1.3577903725447193,
+                "creation_time": 1731869505.1453989,
+                "auxillary_file_paths": [
+                    "results\\halfBasic2\\AgentController\\AgentController-3999968.pt"
+                ]
+            },
+            {
+                "steps": 4499991,
+                "file_path": "results\\halfBasic2\\AgentController\\AgentController-4499991.onnx",
+                "reward": 1.2309722734822168,
+                "creation_time": 1731869924.7458284,
+                "auxillary_file_paths": [
+                    "results\\halfBasic2\\AgentController\\AgentController-4499991.pt"
+                ]
+            },
+            {
+                "steps": 4999990,
+                "file_path": "results\\halfBasic2\\AgentController\\AgentController-4999990.onnx",
+                "reward": 1.3958935136677788,
+                "creation_time": 1731870342.326277,
+                "auxillary_file_paths": [
+                    "results\\halfBasic2\\AgentController\\AgentController-4999990.pt"
+                ]
+            },
+            {
+                "steps": 5000246,
+                "file_path": "results\\halfBasic2\\AgentController\\AgentController-5000246.onnx",
+                "reward": 1.3958935136677788,
+                "creation_time": 1731870342.377721,
+                "auxillary_file_paths": [
+                    "results\\halfBasic2\\AgentController\\AgentController-5000246.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 5000246,
+            "file_path": "results\\halfBasic2\\AgentController.onnx",
+            "reward": 1.3958935136677788,
+            "creation_time": 1731870342.377721,
+            "auxillary_file_paths": [
+                "results\\halfBasic2\\AgentController\\AgentController-5000246.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.4.1+cpu"
+    }
+}

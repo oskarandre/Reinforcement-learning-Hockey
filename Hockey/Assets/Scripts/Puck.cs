@@ -50,7 +50,7 @@ public class Puck : MonoBehaviour
     private void OnTriggerEnter(Collider other){
 
         if(other.CompareTag("Stick")){
-            //agent.AgentReward(0.01f, "Stick");
+            agent.AgentReward(0.01f, "Stick");
         }
     }
 //*************************** CALCULATE REWARD FUNCTIONS PUCK ************************************
