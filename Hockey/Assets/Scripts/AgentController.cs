@@ -1,3 +1,223 @@
+
+
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Unity.MLAgents;
+using Unity.MLAgents.Actuators;
+using Unity.MLAgents.Sensors;
+
+public class AgentMove : Agent
+{
+    [SerializeField] private Transform puck;
+    [SerializeField] private float moveSpeed = 300f; // Reduced from 1000f for better control
+    [SerializeField] private float rotateSpeed = 150f; // Reduced from 500f for smoother rotation
+
+    public Rigidbody rb;
+    public Rigidbody puckRB;
+    public GoalDetectWithInput goalDetect;
+
+    // Different stages for different levels of complexity
+    // Do 5m steps for each stage
+
+    // Stage 1: Agent and puck close to the goal for faster learning
+    // Reward for moving forward and penalty for sticking to walls
+    public bool stage1 = true;
+    
+    // Stage 2: Agent and puck position with less chance of being close to the goal
+    // Reward for moving forward and penalty for sticking to walls
+    public bool stage2 = false;
+
+    // Stage 3: Agent and puck position with more variety for more complex learning
+    // No reward for moving forward or sticking to walls, only time penalty and goal touching penalty
+    public bool stage3 = false;
+
+    // Stage 4: Agent and puck position with even more variety for more complex learning
+    public bool stage4 = false;
+
+    private float resetTimer = 0f;
+
+    public override void Initialize()
+    {
+        rb = GetComponent<Rigidbody>();
+        puckRB = puck.GetComponent<Rigidbody>(); 
+        goalDetect = puck.GetComponent<GoalDetectWithInput>();
+        goalDetect.agent = this;
+    }
+
+    public override void OnEpisodeBegin()
+    {
+        if (stage1)
+        {
+            // Randomize agent and puck close to the goal for faster learning
+            if (Random.Range(0, 3) == 0)
+            {
+                transform.localPosition = new Vector3(Random.Range(23f, 25f), 5.3f, Random.Range(0f, 4f));
+                puck.localPosition = new Vector3(Random.Range(4f, 5f), 3.5f, Random.Range(-1.5f, 2.5f));
+            }
+            else
+            {
+                transform.localPosition = new Vector3(Random.Range(10f, 23f), 5.3f, Random.Range(-2f, 5f));
+                puck.localPosition = new Vector3(Random.Range(-7f, 4f), 3.5f, Random.Range(-0.5f, 1.5f));
+            }
+            
+        }
+        if (stage2)
+        {
+            // Randomize agent and puck position with less chance of being close to the goal
+            if (Random.Range(0, 5) == 0)
+            {
+                transform.localPosition = new Vector3(Random.Range(23f, 25f), 5.3f, Random.Range(0f, 4f));
+                puck.localPosition = new Vector3(Random.Range(4f, 5f), 3.5f, Random.Range(-1.5f, 2.5f));
+            }
+            else
+            {
+                transform.localPosition = new Vector3(Random.Range(10f, 23f), 5.3f, Random.Range(-2f, 5f));
+                puck.localPosition = new Vector3(Random.Range(-7f, 4f), 3.5f, Random.Range(-0.5f, 1.5f));
+            }
+        }
+
+        if(stage3)
+        {
+            // Randomize agent and puck position with more variety for more complex learning
+            transform.localPosition = new Vector3(Random.Range(10f, 26f), 5.3f, Random.Range(-3f, 6f));
+            puck.localPosition = new Vector3(Random.Range(-8f, 3f), 3.5f, Random.Range(-2f, 2.2f));
+        }
+
+        if (stage4)
+        {
+            // Randomize agent and puck position with even more variety for more complex learning
+            transform.localPosition = new Vector3(Random.Range(10f, 26f), 5.3f, Random.Range(-3f, 6f));
+            puck.localPosition = new Vector3(Random.Range(-8f, 3f), 3.5f, Random.Range(-4f, 4.2f));
+
+            // Randomize rotation for more variety
+            transform.rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
+            puck.rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
+          
+        }
+
+        transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+        puck.rotation = Quaternion.Euler(0f, 0f, 0f);
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        puckRB.velocity = Vector3.zero;
+        resetTimer = 0f;
+    }
+
+    public override void OnActionReceived(ActionBuffers actions)
+    {
+        float moveRotate = Mathf.Clamp(actions.ContinuousActions[0], -1f, 1f);
+        float moveForward = Mathf.Clamp(actions.ContinuousActions[1], -1f, 1f);
+
+        Vector3 moveForce = transform.forward * moveForward * moveSpeed;
+        rb.AddForce(moveForce);
+
+        float torque = moveRotate * rotateSpeed;
+        rb.AddTorque(Vector3.up * torque);
+
+        if (stage1 || stage2)
+        {
+            // Encourage smoother movement and reward progress
+            if (moveForward > 0.1f)
+            {
+                AddReward(0.001f); // Small reward for moving forward
+            }
+        }
+    }
+
+    public override void Heuristic(in ActionBuffers actionsOut)
+    {
+        ActionSegment<float> continuousActions = actionsOut.ContinuousActions;
+        if (continuousActions.Length >= 2)
+        {
+            continuousActions[0] = Input.GetAxis("Horizontal");
+            continuousActions[1] = Input.GetAxis("Vertical");
+        }
+    }
+
+    void Update()
+    {
+        // Time penalty to encourage efficiency
+        
+        resetTimer += Time.deltaTime;
+
+        if(stage1)
+        {
+            AddReward(-0.002f);
+            if (resetTimer > 60f) // Adjusted threshold for episode length
+            {
+                AddReward(-1f); // Strong penalty for taking too long
+                EndEpisode();
+            }
+        }
+        else{
+            AddReward(-0.004f);
+            if (resetTimer > 80f) // Adjusted threshold for episode length
+            {
+                AddReward(-1f); // Strong penalty for taking too long
+                EndEpisode();
+            }
+    }
+
+        
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if ((stage1 || stage2) && other.CompareTag("Wall"))
+        {
+            AddReward(-0.001f); // Negative reward for sticking to walls
+
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("OwnGoal"))
+        {
+            AddReward(-0.1f); // Strong penalty for own goal
+            if (stage1 || stage2)
+            {
+                EndEpisode();
+            }
+        }
+
+        if (other.CompareTag("OpponentGoal"))
+        {
+            AddReward(-0.1f); // Reward for scoring in the opponent's goal
+            if (stage1 || stage2)
+            {
+                EndEpisode();
+            }
+        }
+    }
+
+    public void ScoredAGoal(float reward)
+    {
+        AddReward(reward);
+        EndEpisode();
+    }
+
+    public void AgentReward(float reward, string type)
+    {
+        if (stage1 && type == "Stick")
+        {
+            AddReward(reward);
+        }
+        if (stage2 && type == "Stick")
+        {
+            AddReward(reward * 0.1f);
+        }
+
+        else if (stage1 && type == "Time")
+        {
+            AddReward(reward);
+        }
+    }
+}
+
+
 // using System.Collections;
 // using System.Collections.Generic;
 // using UnityEngine;
@@ -219,152 +439,3 @@
 
     
 // }
-
-
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Unity.MLAgents;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Sensors;
-
-public class AgentMove : Agent
-{
-    [SerializeField] private Transform puck;
-    [SerializeField] private float moveSpeed = 300f; // Reduced from 1000f for better control
-    [SerializeField] private float rotateSpeed = 150f; // Reduced from 500f for smoother rotation
-
-    public Rigidbody rb;
-    public Rigidbody puckRB;
-    public GoalDetectWithInput goalDetect;
-    public bool stage1 = true;
-    public bool stage2 = false;
-    public bool stage3 = false;
-
-    private float resetTimer = 0f;
-
-    public override void Initialize()
-    {
-        rb = GetComponent<Rigidbody>();
-        puckRB = puck.GetComponent<Rigidbody>(); 
-        goalDetect = puck.GetComponent<GoalDetectWithInput>();
-        goalDetect.agent = this;
-    }
-
-    public override void OnEpisodeBegin()
-    {
-        if (stage1)
-        {
-            // // Randomize agent and puck position for varied learning experiences
-            // if (Random.Range(0, 5) == 0)
-            // {
-            //     transform.localPosition = new Vector3(Random.Range(23f, 25f), 5.3f, Random.Range(0f, 4f));
-            //     puck.localPosition = new Vector3(Random.Range(4f, 5f), 3.5f, Random.Range(-1.5f, 2.5f));
-            // }
-            // else
-            // {
-            //     transform.localPosition = new Vector3(Random.Range(10f, 23f), 5.3f, Random.Range(-2f, 5f));
-            //     puck.localPosition = new Vector3(Random.Range(-7f, 4f), 3.5f, Random.Range(-0.5f, 1.5f));
-            // }
-
-            transform.localPosition = new Vector3(Random.Range(10f, 26f), 5.3f, Random.Range(-3f, 6f));
-            puck.localPosition = new Vector3(Random.Range(-8f, 3f), 3.5f, Random.Range(-2f, 2.2f));
-
-            // transform.localPosition = new Vector3(Random.Range(10f, 26f), 5.3f, Random.Range(-3f, 6f));
-            // puck.localPosition = new Vector3(Random.Range(-8f, 3f), 3.5f, Random.Range(-4f, 4.2f));
-
-            //random rotation
-            transform.rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
-            puck.rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
-        }
-
-        transform.rotation = Quaternion.Euler(0f, 90f, 0f);
-        puck.rotation = Quaternion.Euler(0f, 0f, 0f);
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-        puckRB.velocity = Vector3.zero;
-        resetTimer = 0f;
-    }
-
-    public override void OnActionReceived(ActionBuffers actions)
-    {
-        float moveRotate = Mathf.Clamp(actions.ContinuousActions[0], -1f, 1f);
-        float moveForward = Mathf.Clamp(actions.ContinuousActions[1], -1f, 1f);
-
-        Vector3 moveForce = transform.forward * moveForward * moveSpeed;
-        rb.AddForce(moveForce);
-
-        float torque = moveRotate * rotateSpeed;
-        rb.AddTorque(Vector3.up * torque);
-
-        // Encourage smoother movement and reward progress
-        if (moveForward > 0.1f)
-        {
-            //AddReward(0.001f); // Small reward for moving forward
-        }
-    }
-
-    public override void Heuristic(in ActionBuffers actionsOut)
-    {
-        ActionSegment<float> continuousActions = actionsOut.ContinuousActions;
-        if (continuousActions.Length >= 2)
-        {
-            continuousActions[0] = Input.GetAxis("Horizontal");
-            continuousActions[1] = Input.GetAxis("Vertical");
-        }
-    }
-
-    void Update()
-    {
-        // Time penalty to encourage efficiency
-        AddReward(-0.004f);
-        resetTimer += Time.deltaTime;
-
-        if (resetTimer > 80f) // Adjusted threshold for episode length
-        {
-            AddReward(-1f); // Strong penalty for taking too long
-            EndEpisode();
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Wall"))
-        {
-            //AddReward(-0.001f); // Negative reward for sticking to walls
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("OwnGoal"))
-        {
-            AddReward(-0.1f); // Strong penalty for own goal
-            //EndEpisode();
-        }
-
-        if (other.CompareTag("OpponentGoal"))
-        {
-            AddReward(-0.1f); // Reward for scoring in the opponent's goal
-            //EndEpisode();
-        }
-    }
-
-    public void ScoredAGoal(float reward)
-    {
-        AddReward(reward);
-        EndEpisode();
-    }
-
-    public void AgentReward(float reward, string type)
-    {
-        if (stage1 && type == "Stick")
-        {
-            AddReward(reward);
-        }
-        else if (stage1 && type == "Time")
-        {
-            AddReward(reward);
-        }
-    }
-}
