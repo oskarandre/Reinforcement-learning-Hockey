@@ -12,8 +12,8 @@ public class Puck : MonoBehaviour
 
     private void OnTriggerEnter(Collider other){
 
-        // if(other.CompareTag("Stick")){
-        //     agent.AgentReward(0.1f, "Stick");
-        // }
+         if(other.CompareTag("Stick")){
+             agent.AgentReward(0.1f, "Stick");
+         }
     }
 }

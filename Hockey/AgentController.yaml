@@ -5,23 +5,23 @@ behaviors:
     hyperparameters:
       batch_size: 2048
       buffer_size: 20480
-      learning_rate: 0.0005
-      beta: 0.003
+      learning_rate: 0.0008
+      beta: 0.005
       epsilon: 0.2
       lambd: 0.99
       num_epoch: 4
       learning_rate_schedule: linear
       beta_schedule: constant
-      epsilon_schedule: constant
+      epsilon_schedule: linear
     network_settings:
       normalize: false
-      hidden_units: 256
+      hidden_units: 512
       num_layers: 2
     reward_signals:
       extrinsic:
         gamma: 0.99
         strength: 1
     max_steps: 5000000
-    time_horizon: 96
+    time_horizon: 512
     summary_freq: 100000
 

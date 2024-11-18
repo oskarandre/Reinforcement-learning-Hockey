@@ -1,0 +1,65 @@
+{
+    "AgentController": {
+        "checkpoints": [
+            {
+                "steps": 3499910,
+                "file_path": "results/Jagger2/AgentController/AgentController-3499910.onnx",
+                "reward": 0.9593449981092549,
+                "creation_time": 1731895633.9956381,
+                "auxillary_file_paths": [
+                    "results/Jagger2/AgentController/AgentController-3499910.pt"
+                ]
+            },
+            {
+                "steps": 3999951,
+                "file_path": "results/Jagger2/AgentController/AgentController-3999951.onnx",
+                "reward": 0.9702419525868183,
+                "creation_time": 1731897244.770174,
+                "auxillary_file_paths": [
+                    "results/Jagger2/AgentController/AgentController-3999951.pt"
+                ]
+            },
+            {
+                "steps": 4499973,
+                "file_path": "results/Jagger2/AgentController/AgentController-4499973.onnx",
+                "reward": 0.9339366306861242,
+                "creation_time": 1731898875.1156359,
+                "auxillary_file_paths": [
+                    "results/Jagger2/AgentController/AgentController-4499973.pt"
+                ]
+            },
+            {
+                "steps": 4999824,
+                "file_path": "results/Jagger2/AgentController/AgentController-4999824.onnx",
+                "reward": 0.9888964262949366,
+                "creation_time": 1731900509.9241889,
+                "auxillary_file_paths": [
+                    "results/Jagger2/AgentController/AgentController-4999824.pt"
+                ]
+            },
+            {
+                "steps": 5000271,
+                "file_path": "results/Jagger2/AgentController/AgentController-5000271.onnx",
+                "reward": 0.9883674125413637,
+                "creation_time": 1731900510.185152,
+                "auxillary_file_paths": [
+                    "results/Jagger2/AgentController/AgentController-5000271.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 5000271,
+            "file_path": "results/Jagger2/AgentController.onnx",
+            "reward": 0.9883674125413637,
+            "creation_time": 1731900510.185152,
+            "auxillary_file_paths": [
+                "results/Jagger2/AgentController/AgentController-5000271.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.2.2"
+    }
+}

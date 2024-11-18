@@ -1,0 +1,65 @@
+{
+    "AgentController": {
+        "checkpoints": [
+            {
+                "steps": 2499997,
+                "file_path": "results/FuckItWeBall4/AgentController/AgentController-2499997.onnx",
+                "reward": 0.09635048716911795,
+                "creation_time": 1731351568.5534122,
+                "auxillary_file_paths": [
+                    "results/FuckItWeBall4/AgentController/AgentController-2499997.pt"
+                ]
+            },
+            {
+                "steps": 2999978,
+                "file_path": "results/FuckItWeBall4/AgentController/AgentController-2999978.onnx",
+                "reward": 0.10987648764644917,
+                "creation_time": 1731353395.004321,
+                "auxillary_file_paths": [
+                    "results/FuckItWeBall4/AgentController/AgentController-2999978.pt"
+                ]
+            },
+            {
+                "steps": 3499985,
+                "file_path": "results/FuckItWeBall4/AgentController/AgentController-3499985.onnx",
+                "reward": 0.12290982376126681,
+                "creation_time": 1731355233.27932,
+                "auxillary_file_paths": [
+                    "results/FuckItWeBall4/AgentController/AgentController-3499985.pt"
+                ]
+            },
+            {
+                "steps": 3999980,
+                "file_path": "results/FuckItWeBall4/AgentController/AgentController-3999980.onnx",
+                "reward": 0.15084990355766045,
+                "creation_time": 1731357142.854622,
+                "auxillary_file_paths": [
+                    "results/FuckItWeBall4/AgentController/AgentController-3999980.pt"
+                ]
+            },
+            {
+                "steps": 4000010,
+                "file_path": "results/FuckItWeBall4/AgentController/AgentController-4000010.onnx",
+                "reward": 0.15403991895622776,
+                "creation_time": 1731357143.173446,
+                "auxillary_file_paths": [
+                    "results/FuckItWeBall4/AgentController/AgentController-4000010.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 4000010,
+            "file_path": "results/FuckItWeBall4/AgentController.onnx",
+            "reward": 0.15403991895622776,
+            "creation_time": 1731357143.173446,
+            "auxillary_file_paths": [
+                "results/FuckItWeBall4/AgentController/AgentController-4000010.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.2.2"
+    }
+}
