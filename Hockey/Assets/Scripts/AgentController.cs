@@ -255,17 +255,24 @@ public class AgentMove : Agent
     {
         if (stage1)
         {
-            // Randomize agent and puck position for varied learning experiences
-            if (Random.Range(0, 5) == 0)
-            {
-                transform.localPosition = new Vector3(Random.Range(23f, 25f), 5.3f, Random.Range(0f, 4f));
-                puck.localPosition = new Vector3(Random.Range(4f, 5f), 3.5f, Random.Range(-1.5f, 2.5f));
-            }
-            else
-            {
-                transform.localPosition = new Vector3(Random.Range(10f, 23f), 5.3f, Random.Range(-2f, 5f));
-                puck.localPosition = new Vector3(Random.Range(-7f, 4f), 3.5f, Random.Range(-0.5f, 1.5f));
-            }
+            // // Randomize agent and puck position for varied learning experiences
+            // if (Random.Range(0, 5) == 0)
+            // {
+            //     transform.localPosition = new Vector3(Random.Range(23f, 25f), 5.3f, Random.Range(0f, 4f));
+            //     puck.localPosition = new Vector3(Random.Range(4f, 5f), 3.5f, Random.Range(-1.5f, 2.5f));
+            // }
+            // else
+            // {
+            //     transform.localPosition = new Vector3(Random.Range(10f, 23f), 5.3f, Random.Range(-2f, 5f));
+            //     puck.localPosition = new Vector3(Random.Range(-7f, 4f), 3.5f, Random.Range(-0.5f, 1.5f));
+            // }
+
+            transform.localPosition = new Vector3(Random.Range(10f, 26f), 5.3f, Random.Range(-3f, 6f));
+            puck.localPosition = new Vector3(Random.Range(-8f, 3f), 3.5f, Random.Range(-4f, 4.2f));
+
+            //random rotation
+            transform.rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
+            puck.rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
         }
 
         transform.rotation = Quaternion.Euler(0f, 90f, 0f);
@@ -290,7 +297,7 @@ public class AgentMove : Agent
         // Encourage smoother movement and reward progress
         if (moveForward > 0.1f)
         {
-            AddReward(0.001f); // Small reward for moving forward
+            //AddReward(0.001f); // Small reward for moving forward
         }
     }
 
@@ -307,7 +314,7 @@ public class AgentMove : Agent
     void Update()
     {
         // Time penalty to encourage efficiency
-        AddReward(-0.002f);
+        AddReward(-0.004f);
         resetTimer += Time.deltaTime;
 
         if (resetTimer > 80f) // Adjusted threshold for episode length
@@ -321,7 +328,7 @@ public class AgentMove : Agent
     {
         if (other.CompareTag("Wall"))
         {
-            AddReward(-0.001f); // Negative reward for sticking to walls
+            //AddReward(-0.001f); // Negative reward for sticking to walls
         }
     }
 
