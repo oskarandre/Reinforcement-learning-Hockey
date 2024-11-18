@@ -268,7 +268,10 @@ public class AgentMove : Agent
             // }
 
             transform.localPosition = new Vector3(Random.Range(10f, 26f), 5.3f, Random.Range(-3f, 6f));
-            puck.localPosition = new Vector3(Random.Range(-8f, 3f), 3.5f, Random.Range(-4f, 4.2f));
+            puck.localPosition = new Vector3(Random.Range(-8f, 3f), 3.5f, Random.Range(-2f, 2.2f));
+
+            // transform.localPosition = new Vector3(Random.Range(10f, 26f), 5.3f, Random.Range(-3f, 6f));
+            // puck.localPosition = new Vector3(Random.Range(-8f, 3f), 3.5f, Random.Range(-4f, 4.2f));
 
             //random rotation
             transform.rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
