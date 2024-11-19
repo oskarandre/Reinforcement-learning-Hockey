@@ -9032,6 +9032,7 @@ MonoBehaviour:
   stage1: 1
   stage2: 0
   stage3: 0
+  stage4: 0
 --- !u!54 &1266846008
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -14588,7 +14589,7 @@ PrefabInstance:
     - target: {fileID: 6128195320863437459, guid: 6387742c210f66d41822ec2c76e30aad, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 78b014d45cc3b8e4ca2522f15bcc9fd5, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: 236045e55f3f13343be14243da6fe712, type: 3}
     - target: {fileID: 6128195320863437459, guid: 6387742c210f66d41822ec2c76e30aad, type: 3}
       propertyPath: m_BehaviorType
       value: 0

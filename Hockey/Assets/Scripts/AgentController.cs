@@ -151,6 +151,15 @@ public class AgentMove : Agent
                 EndEpisode();
             }
         }
+        if(stage4)
+        {
+            AddReward(-0.004f);
+            if (resetTimer > 120f) // Adjusted threshold for episode length
+            {
+                AddReward(-1f); // Strong penalty for taking too long
+                EndEpisode();
+            }
+        }
         else{
             AddReward(-0.004f);
             if (resetTimer > 80f) // Adjusted threshold for episode length
