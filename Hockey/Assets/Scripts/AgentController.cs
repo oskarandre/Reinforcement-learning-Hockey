@@ -36,6 +36,8 @@ public class AgentMove : Agent
     // Stage 4: Agent and puck position with even more variety for more complex learning
     public bool stage4 = false;
 
+    public bool noStages = false;
+
     private float resetTimer = 0f;
 
     public override void Initialize()
@@ -48,7 +50,20 @@ public class AgentMove : Agent
 
     public override void OnEpisodeBegin()
     {
-        if (stage1)
+
+        transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+        puck.rotation = Quaternion.Euler(0f, 0f, 0f);
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        puckRB.velocity = Vector3.zero;
+        resetTimer = 0f;
+
+        if (noStages)
+        {
+            transform.localPosition = new Vector3(Random.Range(10f, 25f), 5.3f, Random.Range(-3f, 6f));
+            puck.localPosition = new Vector3(Random.Range(-8f, 5f), 3.5f, Random.Range(-2f, 2.2f));
+        }
+        else if (stage1)
         {
             // Randomize agent and puck close to the goal for faster learning
             if (Random.Range(0, 3) == 0)
@@ -63,7 +78,7 @@ public class AgentMove : Agent
             }
             
         }
-        if (stage2)
+        else if (stage2)
         {
             // Randomize agent and puck position with less chance of being close to the goal
             if (Random.Range(0, 5) == 0)
@@ -78,14 +93,14 @@ public class AgentMove : Agent
             }
         }
 
-        if(stage3)
+        else if(stage3)
         {
             // Randomize agent and puck position with more variety for more complex learning
             transform.localPosition = new Vector3(Random.Range(10f, 26f), 5.3f, Random.Range(-3f, 6f));
             puck.localPosition = new Vector3(Random.Range(-8f, 3f), 3.5f, Random.Range(-2f, 2.2f));
         }
 
-        if (stage4)
+        else if (stage4)
         {
             // Randomize agent and puck position with even more variety for more complex learning
             transform.localPosition = new Vector3(Random.Range(10f, 26f), 5.3f, Random.Range(-3f, 6f));
@@ -96,13 +111,7 @@ public class AgentMove : Agent
             puck.rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
           
         }
-
-        transform.rotation = Quaternion.Euler(0f, 90f, 0f);
-        puck.rotation = Quaternion.Euler(0f, 0f, 0f);
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-        puckRB.velocity = Vector3.zero;
-        resetTimer = 0f;
+        
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -141,8 +150,16 @@ public class AgentMove : Agent
         // Time penalty to encourage efficiency
         
         resetTimer += Time.deltaTime;
-
-        if(stage1)
+        if(noStages)
+        {
+            AddReward(-0.004f);
+            if (resetTimer > 120f) // Adjusted threshold for episode length
+            {
+                AddReward(-1f); // Strong penalty for taking too long
+                EndEpisode();
+            }
+        }
+        else if(stage1)
         {
             AddReward(-0.002f);
             if (resetTimer > 60f) // Adjusted threshold for episode length
@@ -151,7 +168,7 @@ public class AgentMove : Agent
                 EndEpisode();
             }
         }
-        if(stage4)
+        else if(stage4)
         {
             AddReward(-0.004f);
             if (resetTimer > 120f) // Adjusted threshold for episode length
