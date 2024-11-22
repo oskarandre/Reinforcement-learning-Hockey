@@ -35,6 +35,12 @@ public class AgentMove : Agent
 
     public bool noStages = false;
 
+    // Select red team and variate stages
+    public bool redTeam = false;
+
+    // Select blue team and no Stages
+    public bool blueTeam = false;
+
     private float resetTimer = 0f;
 
     public override void Initialize()
@@ -202,7 +208,7 @@ public class AgentMove : Agent
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("OwnGoal"))
+        if (other.CompareTag("redGoal"))
         {
             AddReward(-0.1f); // Strong penalty for own goal
             if (stage1 || stage2)
@@ -211,7 +217,7 @@ public class AgentMove : Agent
             }
         }
 
-        if (other.CompareTag("OpponentGoal"))
+        if (other.CompareTag("blueGoal"))
         {
             AddReward(-0.1f); // Reward for scoring in the opponent's goal
             if (stage1 || stage2)
@@ -223,7 +229,14 @@ public class AgentMove : Agent
 
     public void ScoredAGoal(float reward)
     {
-        AddReward(reward);
+        if(redTeam)
+        {
+            AddReward(reward);
+        }
+        if(blueTeam)
+        {
+            AddReward(-reward);
+        }
         EndEpisode();
     }
 
@@ -233,14 +246,13 @@ public class AgentMove : Agent
         {
             AddReward(reward);
         }
-        if (stage2 && type == "Stick")
+        else if (noStages && type == "Stick")
+        {
+            AddReward(0.1f);
+        }
+        else if (stage2 && type == "Stick")
         {
             AddReward(reward * 0.1f);
-        }
-
-        else if (stage1 && type == "Time")
-        {
-            AddReward(reward);
         }
     }
 }

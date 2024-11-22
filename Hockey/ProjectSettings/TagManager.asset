@@ -11,6 +11,8 @@ TagManager:
   - Ice
   - OwnGoal
   - OpponentGoal
+  - redGoal
+  - blueGoal
   layers:
   - Default
   - TransparentFX

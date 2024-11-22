@@ -54,12 +54,12 @@ public class GoalDetectWithInput : MonoBehaviour
     void OnCollisionEnter(Collision col)
     {
         // Touched goal.
-        if (col.gameObject.CompareTag("OpponentGoal"))
+        if (col.gameObject.CompareTag("blueGoal"))
         {
             agent.ScoredAGoal(1f);
             //Debug.Log("Scored");
         }
-        else if (col.gameObject.CompareTag("OwnGoal"))
+        else if (col.gameObject.CompareTag("redGoal"))
         {
             agent.ScoredAGoal(-1f);
             //Debug.Log("Own goal u fukking loser");

@@ -1,0 +1,47 @@
+{
+    "AgentController": {
+        "checkpoints": [
+            {
+                "steps": 499944,
+                "file_path": "results\\stagesRedTeam1\\AgentController\\AgentController-499944.onnx",
+                "reward": 2.901666729648908,
+                "creation_time": 1732283326.0455296,
+                "auxillary_file_paths": [
+                    "results\\stagesRedTeam1\\AgentController\\AgentController-499944.pt"
+                ]
+            },
+            {
+                "steps": 999946,
+                "file_path": "results\\stagesRedTeam1\\AgentController\\AgentController-999946.onnx",
+                "reward": 3.1291250496481857,
+                "creation_time": 1732283866.951918,
+                "auxillary_file_paths": [
+                    "results\\stagesRedTeam1\\AgentController\\AgentController-999946.pt"
+                ]
+            },
+            {
+                "steps": 1257165,
+                "file_path": "results\\stagesRedTeam1\\AgentController\\AgentController-1257165.onnx",
+                "reward": 3.7998667230208714,
+                "creation_time": 1732284166.501003,
+                "auxillary_file_paths": [
+                    "results\\stagesRedTeam1\\AgentController\\AgentController-1257165.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1257165,
+            "file_path": "results\\stagesRedTeam1\\AgentController.onnx",
+            "reward": 3.7998667230208714,
+            "creation_time": 1732284166.501003,
+            "auxillary_file_paths": [
+                "results\\stagesRedTeam1\\AgentController\\AgentController-1257165.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.4.1+cpu"
+    }
+}
