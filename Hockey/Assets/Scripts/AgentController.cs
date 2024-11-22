@@ -1,6 +1,3 @@
-
-
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,6 +45,7 @@ public class AgentMove : Agent
         goalDetect.agent = this;
     }
 
+
     public override void OnEpisodeBegin()
     {
 
@@ -60,8 +58,13 @@ public class AgentMove : Agent
 
         if (noStages)
         {
-            transform.localPosition = new Vector3(Random.Range(10f, 25f), 5.3f, Random.Range(-3f, 6f));
-            puck.localPosition = new Vector3(Random.Range(-8f, 5f), 3.5f, Random.Range(-2f, 2.2f));
+            // Randomize agent and puck position with even more variety for more complex learning
+            transform.localPosition = new Vector3(Random.Range(10f, 26f), 5.3f, Random.Range(-3f, 6f));
+            puck.localPosition = new Vector3(Random.Range(-8f, 3f), 3.5f, Random.Range(-4f, 4.2f));
+
+            // Randomize rotation for more variety
+            transform.rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
+            puck.rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
         }
         else if (stage1)
         {
@@ -109,7 +112,6 @@ public class AgentMove : Agent
             // Randomize rotation for more variety
             transform.rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
             puck.rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
-          
         }
         
     }
@@ -125,7 +127,7 @@ public class AgentMove : Agent
         float torque = moveRotate * rotateSpeed;
         rb.AddTorque(Vector3.up * torque);
 
-        if (stage1 || stage2)
+        if (stage1 || stage2 || noStages)
         {
             // Encourage smoother movement and reward progress
             if (moveForward > 0.1f)
@@ -161,7 +163,7 @@ public class AgentMove : Agent
         }
         else if(stage1)
         {
-            AddReward(-0.002f);
+            AddReward(-0.004f);
             if (resetTimer > 60f) // Adjusted threshold for episode length
             {
                 AddReward(-1f); // Strong penalty for taking too long
@@ -191,7 +193,7 @@ public class AgentMove : Agent
 
     private void OnTriggerStay(Collider other)
     {
-        if ((stage1 || stage2) && other.CompareTag("Wall"))
+        if ((stage1 || stage2 || noStages) && other.CompareTag("Wall"))
         {
             AddReward(-0.001f); // Negative reward for sticking to walls
 
