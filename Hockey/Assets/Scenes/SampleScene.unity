@@ -10794,14 +10794,14 @@ PrefabInstance:
     - target: {fileID: 1262444507238353812, guid: b7b1e4bd6599d49ff908789067d5374b, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: f53b4cc0dfc0e467abc0353faf7810cc, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 1262444507238353812, guid: b7b1e4bd6599d49ff908789067d5374b, type: 3}
       propertyPath: m_BehaviorType
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1262444507238353812, guid: b7b1e4bd6599d49ff908789067d5374b, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
-      value: 17
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1262444507238353812, guid: b7b1e4bd6599d49ff908789067d5374b, type: 3}
       propertyPath: m_BrainParameters.NumStackedVectorObservations
@@ -10809,7 +10809,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1548788690807716138, guid: b7b1e4bd6599d49ff908789067d5374b, type: 3}
       propertyPath: moveSpeed
-      value: 200
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 1548788690807716138, guid: b7b1e4bd6599d49ff908789067d5374b, type: 3}
       propertyPath: rotateSpeed

@@ -1,0 +1,65 @@
+{
+    "AgentController": {
+        "checkpoints": [
+            {
+                "steps": 8499953,
+                "file_path": "results/BarebonesObs1/AgentController/AgentController-8499953.onnx",
+                "reward": null,
+                "creation_time": 1731987727.114489,
+                "auxillary_file_paths": [
+                    "results/BarebonesObs1/AgentController/AgentController-8499953.pt"
+                ]
+            },
+            {
+                "steps": 8999904,
+                "file_path": "results/BarebonesObs1/AgentController/AgentController-8999904.onnx",
+                "reward": null,
+                "creation_time": 1731989256.437333,
+                "auxillary_file_paths": [
+                    "results/BarebonesObs1/AgentController/AgentController-8999904.pt"
+                ]
+            },
+            {
+                "steps": 9499940,
+                "file_path": "results/BarebonesObs1/AgentController/AgentController-9499940.onnx",
+                "reward": null,
+                "creation_time": 1731990731.163371,
+                "auxillary_file_paths": [
+                    "results/BarebonesObs1/AgentController/AgentController-9499940.pt"
+                ]
+            },
+            {
+                "steps": 9999742,
+                "file_path": "results/BarebonesObs1/AgentController/AgentController-9999742.onnx",
+                "reward": -0.5,
+                "creation_time": 1731992261.047497,
+                "auxillary_file_paths": [
+                    "results/BarebonesObs1/AgentController/AgentController-9999742.pt"
+                ]
+            },
+            {
+                "steps": 10000254,
+                "file_path": "results/BarebonesObs1/AgentController/AgentController-10000254.onnx",
+                "reward": -0.5,
+                "creation_time": 1731992261.309223,
+                "auxillary_file_paths": [
+                    "results/BarebonesObs1/AgentController/AgentController-10000254.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 10000254,
+            "file_path": "results/BarebonesObs1/AgentController.onnx",
+            "reward": -0.5,
+            "creation_time": 1731992261.309223,
+            "auxillary_file_paths": [
+                "results/BarebonesObs1/AgentController/AgentController-10000254.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.2.2"
+    }
+}

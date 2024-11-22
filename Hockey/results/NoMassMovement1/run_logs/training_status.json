@@ -1,0 +1,65 @@
+{
+    "AgentController": {
+        "checkpoints": [
+            {
+                "steps": 8499829,
+                "file_path": "results/NoMassMovement1/AgentController/AgentController-8499829.onnx",
+                "reward": null,
+                "creation_time": 1732248151.8335621,
+                "auxillary_file_paths": [
+                    "results/NoMassMovement1/AgentController/AgentController-8499829.pt"
+                ]
+            },
+            {
+                "steps": 8999541,
+                "file_path": "results/NoMassMovement1/AgentController/AgentController-8999541.onnx",
+                "reward": null,
+                "creation_time": 1732249777.322247,
+                "auxillary_file_paths": [
+                    "results/NoMassMovement1/AgentController/AgentController-8999541.pt"
+                ]
+            },
+            {
+                "steps": 9499871,
+                "file_path": "results/NoMassMovement1/AgentController/AgentController-9499871.onnx",
+                "reward": null,
+                "creation_time": 1732251268.720583,
+                "auxillary_file_paths": [
+                    "results/NoMassMovement1/AgentController/AgentController-9499871.pt"
+                ]
+            },
+            {
+                "steps": 9999588,
+                "file_path": "results/NoMassMovement1/AgentController/AgentController-9999588.onnx",
+                "reward": null,
+                "creation_time": 1732252896.454102,
+                "auxillary_file_paths": [
+                    "results/NoMassMovement1/AgentController/AgentController-9999588.pt"
+                ]
+            },
+            {
+                "steps": 10000100,
+                "file_path": "results/NoMassMovement1/AgentController/AgentController-10000100.onnx",
+                "reward": null,
+                "creation_time": 1732252896.8342102,
+                "auxillary_file_paths": [
+                    "results/NoMassMovement1/AgentController/AgentController-10000100.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 10000100,
+            "file_path": "results/NoMassMovement1/AgentController.onnx",
+            "reward": null,
+            "creation_time": 1732252896.8342102,
+            "auxillary_file_paths": [
+                "results/NoMassMovement1/AgentController/AgentController-10000100.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.2.2"
+    }
+}

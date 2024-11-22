@@ -73,6 +73,7 @@ public class AgentMove : Agent
     {
         Quaternion rotation = transform.localRotation;
         Vector3 normalizedRotation = rotation.eulerAngles / 360.0f;  // [0,1]
+            
         // Max_x = 27.86423 , Min_x = 8.021378 , Max_z = 7.825231, Min_z = -4.808197
         // normalizedValue = (currentValue - minValue)/(maxValue - minValue)
         //sensor.AddObservation(puck.transform.position - transform.position); 
@@ -86,18 +87,19 @@ public class AgentMove : Agent
 
         float normalize_goal_x = Mathf.Clamp((goalpos_x - Min_puck_x) / (Max_puck_x - Min_puck_x), 0f, 1f);
         float normalize_goal_z = Mathf.Clamp((goalpos_z - Min_puck_z) / (Max_puck_z - Min_puck_z), 0f, 1f);
-
-        sensor.AddObservation(normalizedRotation); // 3?
+        
+       
         sensor.AddObservation(rb.velocity); // 3
-        sensor.AddObservation(rb.angularVelocity); // 3 //GetAccumulatedTorque / force?
+        sensor.AddObservation(puck.GetComponent<Rigidbody>().velocity); // 3
+        sensor.AddObservation(normalizedRotation); // 3
+        //sensor.AddObservation(rb.angularVelocity); // 3 //GetAccumulatedTorque / force?
         sensor.AddObservation(normalized_x); // 1
         sensor.AddObservation(normalized_z); // 1
         sensor.AddObservation(normalize_puck_x - normalized_x); // 1
-        //sensor.AddObservation(normalize_puck_z - normalized_z); // 1 added after MickJagger1 and 2
-        sensor.AddObservation(puck.GetComponent<Rigidbody>().velocity); // 3
+        sensor.AddObservation(normalize_puck_z - normalized_z); // 1 added after MickJagger1 and 2
+        
         sensor.AddObservation(normalize_goal_x - normalize_puck_x); // 1
         sensor.AddObservation(normalize_goal_z - normalize_puck_z); // 1        
-
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -109,7 +111,7 @@ public class AgentMove : Agent
         
         // Apply force for movement
         Vector3 moveForce = transform.forward * moveForward * moveSpeed; 
-        rb.AddForce(moveForce, ForceMode.Force);
+        rb.AddForce(moveForce, ForceMode.VelocityChange);
 
         //rb.MovePosition(transform.position + transform.forward * moveForward * Time.deltaTime);
 

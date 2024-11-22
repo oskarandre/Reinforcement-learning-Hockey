@@ -35,14 +35,14 @@ PrefabInstance:
     - target: {fileID: 2470520550865348989, guid: a54e343b0ea614a64a6cfff01a03f33a, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: f53b4cc0dfc0e467abc0353faf7810cc, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 2470520550865348989, guid: a54e343b0ea614a64a6cfff01a03f33a, type: 3}
       propertyPath: m_BehaviorType
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2470520550865348989, guid: a54e343b0ea614a64a6cfff01a03f33a, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
-      value: 17
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2788415187840408515, guid: a54e343b0ea614a64a6cfff01a03f33a, type: 3}
       propertyPath: MaxStep
@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2788415187840408515, guid: a54e343b0ea614a64a6cfff01a03f33a, type: 3}
       propertyPath: moveSpeed
-      value: 200
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 2788415187840408515, guid: a54e343b0ea614a64a6cfff01a03f33a, type: 3}
       propertyPath: rotateSpeed
