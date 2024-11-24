@@ -1,0 +1,65 @@
+{
+    "AgentController": {
+        "checkpoints": [
+            {
+                "steps": 3499936,
+                "file_path": "results\\stagesRedTeam3\\AgentController\\AgentController-3499936.onnx",
+                "reward": -0.04866667961080869,
+                "creation_time": 1732365042.3625953,
+                "auxillary_file_paths": [
+                    "results\\stagesRedTeam3\\AgentController\\AgentController-3499936.pt"
+                ]
+            },
+            {
+                "steps": 3999989,
+                "file_path": "results\\stagesRedTeam3\\AgentController\\AgentController-3999989.onnx",
+                "reward": -0.11129413457477794,
+                "creation_time": 1732365462.4217775,
+                "auxillary_file_paths": [
+                    "results\\stagesRedTeam3\\AgentController\\AgentController-3999989.pt"
+                ]
+            },
+            {
+                "steps": 4499996,
+                "file_path": "results\\stagesRedTeam3\\AgentController\\AgentController-4499996.onnx",
+                "reward": -0.060428583196231296,
+                "creation_time": 1732365880.9019392,
+                "auxillary_file_paths": [
+                    "results\\stagesRedTeam3\\AgentController\\AgentController-4499996.pt"
+                ]
+            },
+            {
+                "steps": 4999939,
+                "file_path": "results\\stagesRedTeam3\\AgentController\\AgentController-4999939.onnx",
+                "reward": 0.7399999797344208,
+                "creation_time": 1732366301.390427,
+                "auxillary_file_paths": [
+                    "results\\stagesRedTeam3\\AgentController\\AgentController-4999939.pt"
+                ]
+            },
+            {
+                "steps": 5000003,
+                "file_path": "results\\stagesRedTeam3\\AgentController\\AgentController-5000003.onnx",
+                "reward": 0.7399999797344208,
+                "creation_time": 1732366301.4324708,
+                "auxillary_file_paths": [
+                    "results\\stagesRedTeam3\\AgentController\\AgentController-5000003.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 5000003,
+            "file_path": "results\\stagesRedTeam3\\AgentController.onnx",
+            "reward": 0.7399999797344208,
+            "creation_time": 1732366301.4324708,
+            "auxillary_file_paths": [
+                "results\\stagesRedTeam3\\AgentController\\AgentController-5000003.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.4.1+cpu"
+    }
+}
