@@ -1,3 +1,116 @@
+// using System.Collections;
+// using System.Collections.Generic;
+// using UnityEngine;
+// using Unity.MLAgents;
+// using Unity.MLAgents.Actuators;
+// using Unity.MLAgents.Sensors;
+
+// public class AgentMove : Agent
+// {
+//     [SerializeField] private Transform puck;
+//     [SerializeField] private float moveSpeed = 300f; // Reduced from 1000f for better control
+//     [SerializeField] private float rotateSpeed = 150f; // Reduced from 500f for smoother rotation
+
+//     public Rigidbody rb;
+//     public Rigidbody puckRB;
+//     public GoalDetectWithInput goalDetect;
+
+    
+//     // Select red team and variate stages
+//     public bool redTeam = false;
+
+//     // Select blue team and no Stages
+//     public bool blueTeam = false;
+
+//     private float resetTimer = 0f;
+
+//     private bool redGoal = false;
+//     private bool blueGoal = false;
+
+//     public override void Initialize()
+//     {
+//         rb = GetComponent<Rigidbody>();
+//         puckRB = puck.GetComponent<Rigidbody>(); 
+//         goalDetect = puck.GetComponent<GoalDetectWithInput>();
+//         goalDetect.agent = this;
+//     }
+
+
+//     public override void OnEpisodeBegin()
+//     {
+
+//         transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+//         puck.rotation = Quaternion.Euler(0f, 0f, 0f);
+//         rb.velocity = Vector3.zero;
+//         rb.angularVelocity = Vector3.zero;
+//         puckRB.velocity = Vector3.zero;
+//         resetTimer = 0f;
+
+        
+//         // Randomize agent and puck position with even more variety for more complex learning
+//         transform.localPosition = new Vector3(12f, 5.3f, 1.4f);
+//         puck.localPosition = new Vector3(2.5f, 3.5f, 1f);
+
+//         // Randomize rotation for more variety
+//         transform.rotation = Quaternion.Euler(0f,0f, 0f);        
+        
+//     }
+
+//     public override void OnActionReceived(ActionBuffers actions)
+//     {
+//         float moveRotate = Mathf.Clamp(actions.ContinuousActions[0], -1f, 1f);
+//         float moveForward = Mathf.Clamp(actions.ContinuousActions[1], -1f, 1f);
+        
+//         if (!redGoal && !blueGoal){
+//             Vector3 moveForce = transform.forward * moveForward * moveSpeed;
+//             rb.AddForce(moveForce);
+
+//             float torque = moveRotate * rotateSpeed;
+//             rb.AddTorque(Vector3.up * torque);
+//         }
+//     }
+
+//     public override void Heuristic(in ActionBuffers actionsOut)
+//     {
+//         ActionSegment<float> continuousActions = actionsOut.ContinuousActions;
+//         if (continuousActions.Length >= 2)
+//         {
+//             continuousActions[0] = Input.GetAxis("Horizontal");
+//             continuousActions[1] = Input.GetAxis("Vertical");
+//         }
+//     }
+
+//     void Update()
+//     {
+//         // Time penalty to encourage efficiency
+        
+//         resetTimer += Time.deltaTime;
+//     }
+
+        
+
+//     public void ScoredAGoal(float reward)
+//     {
+//         if(redTeam)
+//         {
+//             redGoal = true;
+//             print("Red Goal Time: " + resetTimer);
+//         }
+//         if(blueTeam)
+//         {
+//             blueGoal = true;
+//             print("Blue Goal Time: " + resetTimer);
+//         }
+//     }
+
+//     public void AgentReward(float reward, string type)
+//     {
+//     }
+// }
+
+
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
