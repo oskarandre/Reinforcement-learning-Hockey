@@ -361,7 +361,7 @@ public class AgentMove : Agent
         }
         else if (noStages && type == "Stick")
         {
-            AddReward(0.1f);
+            AddReward(0.001f);
         }
         else if (stage2 && type == "Stick")
         {
