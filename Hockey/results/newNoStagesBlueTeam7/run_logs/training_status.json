@@ -1,0 +1,65 @@
+{
+    "AgentController": {
+        "checkpoints": [
+            {
+                "steps": 3499987,
+                "file_path": "results\\newNoStagesBlueTeam7\\AgentController\\AgentController-3499987.onnx",
+                "reward": 3.5121547006643734,
+                "creation_time": 1733405297.2349803,
+                "auxillary_file_paths": [
+                    "results\\newNoStagesBlueTeam7\\AgentController\\AgentController-3499987.pt"
+                ]
+            },
+            {
+                "steps": 3999952,
+                "file_path": "results\\newNoStagesBlueTeam7\\AgentController\\AgentController-3999952.onnx",
+                "reward": 3.4177508736029267,
+                "creation_time": 1733405713.976657,
+                "auxillary_file_paths": [
+                    "results\\newNoStagesBlueTeam7\\AgentController\\AgentController-3999952.pt"
+                ]
+            },
+            {
+                "steps": 4499969,
+                "file_path": "results\\newNoStagesBlueTeam7\\AgentController\\AgentController-4499969.onnx",
+                "reward": 3.403667449951172,
+                "creation_time": 1733406129.0321481,
+                "auxillary_file_paths": [
+                    "results\\newNoStagesBlueTeam7\\AgentController\\AgentController-4499969.pt"
+                ]
+            },
+            {
+                "steps": 4999991,
+                "file_path": "results\\newNoStagesBlueTeam7\\AgentController\\AgentController-4999991.onnx",
+                "reward": 3.471619894107183,
+                "creation_time": 1733406531.930363,
+                "auxillary_file_paths": [
+                    "results\\newNoStagesBlueTeam7\\AgentController\\AgentController-4999991.pt"
+                ]
+            },
+            {
+                "steps": 5000055,
+                "file_path": "results\\newNoStagesBlueTeam7\\AgentController\\AgentController-5000055.onnx",
+                "reward": 3.471619894107183,
+                "creation_time": 1733406531.9869914,
+                "auxillary_file_paths": [
+                    "results\\newNoStagesBlueTeam7\\AgentController\\AgentController-5000055.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 5000055,
+            "file_path": "results\\newNoStagesBlueTeam7\\AgentController.onnx",
+            "reward": 3.471619894107183,
+            "creation_time": 1733406531.9869914,
+            "auxillary_file_paths": [
+                "results\\newNoStagesBlueTeam7\\AgentController\\AgentController-5000055.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.4.1+cpu"
+    }
+}
