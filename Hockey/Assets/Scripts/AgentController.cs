@@ -251,7 +251,7 @@ public class AgentMove : Agent
             // Encourage smoother movement and reward progress
             if (moveForward > 0.1f)
             {
-                AddReward(0.001f); // Small reward for moving forward
+                AddReward(0.0001f); // Small reward for moving forward
             }
         }
     }
@@ -276,7 +276,7 @@ public class AgentMove : Agent
             AddReward(-0.004f);
             if (resetTimer > 120f) // Adjusted threshold for episode length
             {
-                AddReward(-1f); // Strong penalty for taking too long
+                AddReward(-2f); // Strong penalty for taking too long
                 EndEpisode();
             }
         }
