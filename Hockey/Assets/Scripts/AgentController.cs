@@ -154,6 +154,10 @@ public class AgentMove : Agent
     // Select blue team and no Stages
     public bool blueTeam = false;
 
+    public bool dummy = false;
+
+    public bool compare = false;
+
     private float resetTimer = 0f;
 
     public override void Initialize()
@@ -175,7 +179,40 @@ public class AgentMove : Agent
         puckRB.velocity = Vector3.zero;
         resetTimer = 0f;
 
-        if (noStages)
+        if (compare){
+            // // no randomization for comparison
+            // transform.localPosition = new Vector3(12f, 5.3f, 1.4f);
+            // puck.localPosition = new Vector3(1.5f, 3.5f, 0f);
+
+            // // Randomize rotation for more variety
+            // transform.rotation = Quaternion.Euler(0f,90f, 0f);
+            // puck.rotation = Quaternion.Euler(0f,90f, 0f);
+
+            // // no randomization for comparison
+            // transform.localPosition = new Vector3(25f, 5.3f, 5.1f);
+            // puck.localPosition = new Vector3(-3f, 3.5f, 0f);
+
+            // // Randomize rotation for more variety
+            // transform.rotation = Quaternion.Euler(0f,90f, 0f);
+            // puck.rotation = Quaternion.Euler(0f,90f, 0f);
+
+            // // no randomization for comparison
+            // transform.localPosition = new Vector3(24f, 5.3f, 1.4f);
+            // puck.localPosition = new Vector3(-5.5f, 3.5f, 0f);
+
+            // // Randomize rotation for more variety
+            // transform.rotation = Quaternion.Euler(0f,-90f, 0f);
+            // puck.rotation = Quaternion.Euler(0f,90f, 0f);
+
+            // no randomization for comparison
+            transform.localPosition = new Vector3(10.6f, 5.3f, -2.12f);
+            puck.localPosition = new Vector3(-0.6f, 3.5f, 2.25f);
+
+            // Randomize rotation for more variety
+            transform.rotation = Quaternion.Euler(0f,-90f, 0f);
+            puck.rotation = Quaternion.Euler(0f,90f, 0f);
+        }
+       else if (noStages)
         {
             // Randomize agent and puck position with even more variety for more complex learning
             transform.localPosition = new Vector3(Random.Range(10f, 26f), 5.3f, Random.Range(-3f, 6f));
