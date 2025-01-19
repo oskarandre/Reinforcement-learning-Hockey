@@ -1,6 +1,9 @@
 # Reinforcement Learning Hockey
 
 This project uses Unity's mlAgents and reinforcement learning to train agents to play hockey against each other.
+The players are controlled by AI, trained with deep reinforcement learning (DRL) andProximal Policy Optimization (PPO). 
+These methods enable the agents to continuously learn and optimize their strategies, resulting in dynamic, adaptive gameplay that mimics human decision-making and teamwork.
+
 
 ## Installation
 
