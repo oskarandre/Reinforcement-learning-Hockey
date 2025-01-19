@@ -1,0 +1,65 @@
+{
+    "AgentController": {
+        "checkpoints": [
+            {
+                "steps": 3499952,
+                "file_path": "results\\noStageTest1\\AgentController\\AgentController-3499952.onnx",
+                "reward": null,
+                "creation_time": 1732104779.8854232,
+                "auxillary_file_paths": [
+                    "results\\noStageTest1\\AgentController\\AgentController-3499952.pt"
+                ]
+            },
+            {
+                "steps": 3999993,
+                "file_path": "results\\noStageTest1\\AgentController\\AgentController-3999993.onnx",
+                "reward": -1.6039999723434448,
+                "creation_time": 1732105160.2042027,
+                "auxillary_file_paths": [
+                    "results\\noStageTest1\\AgentController\\AgentController-3999993.pt"
+                ]
+            },
+            {
+                "steps": 4499942,
+                "file_path": "results\\noStageTest1\\AgentController\\AgentController-4499942.onnx",
+                "reward": null,
+                "creation_time": 1732105547.8198867,
+                "auxillary_file_paths": [
+                    "results\\noStageTest1\\AgentController\\AgentController-4499942.pt"
+                ]
+            },
+            {
+                "steps": 4999974,
+                "file_path": "results\\noStageTest1\\AgentController\\AgentController-4999974.onnx",
+                "reward": null,
+                "creation_time": 1732105987.8722997,
+                "auxillary_file_paths": [
+                    "results\\noStageTest1\\AgentController\\AgentController-4999974.pt"
+                ]
+            },
+            {
+                "steps": 5001126,
+                "file_path": "results\\noStageTest1\\AgentController\\AgentController-5001126.onnx",
+                "reward": null,
+                "creation_time": 1732105987.977766,
+                "auxillary_file_paths": [
+                    "results\\noStageTest1\\AgentController\\AgentController-5001126.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 5001126,
+            "file_path": "results\\noStageTest1\\AgentController.onnx",
+            "reward": null,
+            "creation_time": 1732105987.977766,
+            "auxillary_file_paths": [
+                "results\\noStageTest1\\AgentController\\AgentController-5001126.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.4.1+cpu"
+    }
+}

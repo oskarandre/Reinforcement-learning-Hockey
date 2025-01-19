@@ -5,58 +5,89 @@ using UnityEngine;
 public class Puck : MonoBehaviour
 {
 
-    [SerializeField] private Transform OwnGoal;
-    [SerializeField] private Transform OpponentGoal;
+    // [SerializeField] private Transform OwnGoal;
+    // [SerializeField] private Transform OpponentGoal;
 
     public AgentMove agent; 
+    // public float maxstep = 500f; // Define maxstep
+    //private float tick = 0f;
 
-
+    
     // Start is called before the first frame update
-    void Start()
-    {
+    // void Start()
+    // {
         
-    }
+        
+    // }
 
     // Update is called once per frame
-    void Update()
-    {
-        //the closer the puck is to the goal, the higher the reward
+    // void Update()
+    // {
+    //     Vector3 Stick_pos = agent.transform.GetChild(6).transform.position;
+    //     Vector3 GoalPos = OpponentGoal.position;
+    //     Vector3 PuckPos = transform.position;
 
-        //if the puck is closer to the opponent's goal, give a positive reward
-        //if the puck is closer to the agent's goal, give a negative reward
-
-        Vector3 GoalPos = OpponentGoal.position;
-        Vector3 PuckPos = transform.position;
-
-        float distanceToOpponentGoal = Vector3.Distance(GoalPos, PuckPos);
-
-        //normalize the distance
-        //distanceToOpponentGoal = distanceToOpponentGoal / 15f;
-
-        CalcReward(distanceToOpponentGoal);
+    //     // CalcReward_RB_to_POS(GoalPos, GetComponent<Rigidbody>()); 
+    //     // CalcReward_RB_to_POS(PuckPos, agent.GetComponent<Rigidbody>());
         
-    }
+    //     //CalcReward_Puck_to_Goal(PuckPos, agent.GetComponent<Rigidbody>().transform.position);
+
+    //     //the closer the puck is to the goal, the higher the reward
+    
+    //     // Reward based on Velocity of puck in relation to direction of opponentGoal
+        
+    //     //normalize the distance
+    //     //distanceToOpponentGoal = distanceToOpponentGoal / 15f;
+
+    //     float puck_oppgoal_distance = Vector3.Distance(GoalPos,  PuckPos);
+
+    //     //CalcReward(puck_oppgoal_distance);    
+           
+    //     //tick += 1f;
+        
+    // }
 
     private void OnTriggerEnter(Collider other){
+
         if(other.CompareTag("Stick")){
-            //Debug.Log("Puck hit the stick");
-            //agent.AddReward(0.8f);
-            //agent.EndEpisode();
-
-            agent.AgentReward(0.8f, "Stick");
-
+            agent.AgentReward(0.1f, "Stick");
         }
     }
+//*************************** CALCULATE REWARD FUNCTIONS PUCK ************************************
 
-    public void CalcReward(float distance)
-    {
-        float maxstep = 500f; // Define maxstep
-        float reward = (1f / maxstep) * (1f / (distance * distance));
+    // Try adding method which takes into account the angle of the velocity vector instead?
 
-        //Debug.Log("Reward: " + reward); 
+    // Method to calculate velocity of rigidbody in direction of position, + reward/penalty
+    // public void CalcReward_RB_to_POS(Vector3 position, Rigidbody rigidbody) {
+       
+    //     Vector3 RB_POS_direction = (position - rigidbody.transform.position).normalized;
 
-        agent.AgentReward(reward, "Puck");
-    }
+    //     //float v_dir = Vector3.Dot(rigidbody.GetPointVelocity(agent.transform.GetChild(6).transform.position), RB_POS_direction); // velocity of stick
+    //     float v_dir = Vector3.Dot(rigidbody.velocity, RB_POS_direction); //changed to rigidbody.velocity for puck
+    //     if(v_dir > 1f) {
+    //         agent.AddReward(0.1f); 
+    //         //Debug.Log("Added reward of " + (v_dir));
+    //     }
+        
+    //     //agent.AddReward(v_dir/maxstep); // if v_dir > 0 reward is positive, else negative reward because puck is stuck or travels in wrong direction. 
+    //     //Debug.Log("Added reward of " + (v_dir/maxstep));
+    // }
+
+    // public void CalcReward(float distance)
+    // {
+    //     float PuckVelocity = GetComponent<Rigidbody>().velocity.magnitude;
+
+    //     //Debug.Log("Puck Velocity: " + PuckVelocity);
+
+    //     if (PuckVelocity > 0f){
+    //         float reward = (1f / maxstep) * (1f / (distance * distance));
+
+    //         //Debug.Log("Reward: " + reward); 
+
+    //         agent.AgentReward(reward, "Puck");
+    //     }
+        
+    // }
 
 
 

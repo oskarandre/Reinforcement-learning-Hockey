@@ -1,0 +1,65 @@
+{
+    "AgentController": {
+        "checkpoints": [
+            {
+                "steps": 28499972,
+                "file_path": "results\\stagesRedWnewTags\\AgentController\\AgentController-28499972.onnx",
+                "reward": null,
+                "creation_time": 1733843954.3686993,
+                "auxillary_file_paths": [
+                    "results\\stagesRedWnewTags\\AgentController\\AgentController-28499972.pt"
+                ]
+            },
+            {
+                "steps": 28999948,
+                "file_path": "results\\stagesRedWnewTags\\AgentController\\AgentController-28999948.onnx",
+                "reward": -2.4399999380111694,
+                "creation_time": 1733844351.6739023,
+                "auxillary_file_paths": [
+                    "results\\stagesRedWnewTags\\AgentController\\AgentController-28999948.pt"
+                ]
+            },
+            {
+                "steps": 29499984,
+                "file_path": "results\\stagesRedWnewTags\\AgentController\\AgentController-29499984.onnx",
+                "reward": -2.439999997615814,
+                "creation_time": 1733844750.0314178,
+                "auxillary_file_paths": [
+                    "results\\stagesRedWnewTags\\AgentController\\AgentController-29499984.pt"
+                ]
+            },
+            {
+                "steps": 29999936,
+                "file_path": "results\\stagesRedWnewTags\\AgentController\\AgentController-29999936.onnx",
+                "reward": -2.440000057220459,
+                "creation_time": 1733845150.6998363,
+                "auxillary_file_paths": [
+                    "results\\stagesRedWnewTags\\AgentController\\AgentController-29999936.pt"
+                ]
+            },
+            {
+                "steps": 30006016,
+                "file_path": "results\\stagesRedWnewTags\\AgentController\\AgentController-30006016.onnx",
+                "reward": -2.440000057220459,
+                "creation_time": 1733845150.9610987,
+                "auxillary_file_paths": [
+                    "results\\stagesRedWnewTags\\AgentController\\AgentController-30006016.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 30006016,
+            "file_path": "results\\stagesRedWnewTags\\AgentController.onnx",
+            "reward": -2.440000057220459,
+            "creation_time": 1733845150.9610987,
+            "auxillary_file_paths": [
+                "results\\stagesRedWnewTags\\AgentController\\AgentController-30006016.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.4.1+cpu"
+    }
+}

@@ -1,0 +1,65 @@
+{
+    "AgentController": {
+        "checkpoints": [
+            {
+                "steps": 3499962,
+                "file_path": "results\\Stage3Test1\\AgentController\\AgentController-3499962.onnx",
+                "reward": null,
+                "creation_time": 1732100188.767568,
+                "auxillary_file_paths": [
+                    "results\\Stage3Test1\\AgentController\\AgentController-3499962.pt"
+                ]
+            },
+            {
+                "steps": 3999994,
+                "file_path": "results\\Stage3Test1\\AgentController\\AgentController-3999994.onnx",
+                "reward": null,
+                "creation_time": 1732100590.908376,
+                "auxillary_file_paths": [
+                    "results\\Stage3Test1\\AgentController\\AgentController-3999994.pt"
+                ]
+            },
+            {
+                "steps": 4499994,
+                "file_path": "results\\Stage3Test1\\AgentController\\AgentController-4499994.onnx",
+                "reward": -1.9600000373248396,
+                "creation_time": 1732100981.7639194,
+                "auxillary_file_paths": [
+                    "results\\Stage3Test1\\AgentController\\AgentController-4499994.pt"
+                ]
+            },
+            {
+                "steps": 4999962,
+                "file_path": "results\\Stage3Test1\\AgentController\\AgentController-4999962.onnx",
+                "reward": null,
+                "creation_time": 1732101401.7105303,
+                "auxillary_file_paths": [
+                    "results\\Stage3Test1\\AgentController\\AgentController-4999962.pt"
+                ]
+            },
+            {
+                "steps": 5008858,
+                "file_path": "results\\Stage3Test1\\AgentController\\AgentController-5008858.onnx",
+                "reward": null,
+                "creation_time": 1732101402.0874393,
+                "auxillary_file_paths": [
+                    "results\\Stage3Test1\\AgentController\\AgentController-5008858.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 5008858,
+            "file_path": "results\\Stage3Test1\\AgentController.onnx",
+            "reward": null,
+            "creation_time": 1732101402.0874393,
+            "auxillary_file_paths": [
+                "results\\Stage3Test1\\AgentController\\AgentController-5008858.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.4.1+cpu"
+    }
+}

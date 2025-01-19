@@ -1,0 +1,65 @@
+{
+    "AgentController": {
+        "checkpoints": [
+            {
+                "steps": 8499970,
+                "file_path": "results\\BasicBigRun8\\AgentController\\AgentController-8499970.onnx",
+                "reward": null,
+                "creation_time": 1731582836.1080818,
+                "auxillary_file_paths": [
+                    "results\\BasicBigRun8\\AgentController\\AgentController-8499970.pt"
+                ]
+            },
+            {
+                "steps": 8999967,
+                "file_path": "results\\BasicBigRun8\\AgentController\\AgentController-8999967.onnx",
+                "reward": -2.9998999374608197,
+                "creation_time": 1731583243.9651802,
+                "auxillary_file_paths": [
+                    "results\\BasicBigRun8\\AgentController\\AgentController-8999967.pt"
+                ]
+            },
+            {
+                "steps": 9499996,
+                "file_path": "results\\BasicBigRun8\\AgentController\\AgentController-9499996.onnx",
+                "reward": -2.0184749457985163,
+                "creation_time": 1731583651.2634928,
+                "auxillary_file_paths": [
+                    "results\\BasicBigRun8\\AgentController\\AgentController-9499996.pt"
+                ]
+            },
+            {
+                "steps": 9999956,
+                "file_path": "results\\BasicBigRun8\\AgentController\\AgentController-9999956.onnx",
+                "reward": -2.9998999387025833,
+                "creation_time": 1731584060.9242828,
+                "auxillary_file_paths": [
+                    "results\\BasicBigRun8\\AgentController\\AgentController-9999956.pt"
+                ]
+            },
+            {
+                "steps": 10000020,
+                "file_path": "results\\BasicBigRun8\\AgentController\\AgentController-10000020.onnx",
+                "reward": -2.9998999387025833,
+                "creation_time": 1731584060.9664485,
+                "auxillary_file_paths": [
+                    "results\\BasicBigRun8\\AgentController\\AgentController-10000020.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 10000020,
+            "file_path": "results\\BasicBigRun8\\AgentController.onnx",
+            "reward": -2.9998999387025833,
+            "creation_time": 1731584060.9664485,
+            "auxillary_file_paths": [
+                "results\\BasicBigRun8\\AgentController\\AgentController-10000020.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.4.1+cpu"
+    }
+}

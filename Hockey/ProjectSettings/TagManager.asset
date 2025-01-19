@@ -11,6 +11,10 @@ TagManager:
   - Ice
   - OwnGoal
   - OpponentGoal
+  - redGoal
+  - blueGoal
+  - redTeam
+  - blueTeam
   layers:
   - Default
   - TransparentFX
@@ -18,7 +22,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - AgentLayer
   - 
   - 
   - 

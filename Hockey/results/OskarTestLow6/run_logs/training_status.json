@@ -1,0 +1,47 @@
+{
+    "AgentController": {
+        "checkpoints": [
+            {
+                "steps": 499965,
+                "file_path": "results\\OskarTestLow6\\AgentController\\AgentController-499965.onnx",
+                "reward": -4.500000029802322,
+                "creation_time": 1730846150.922337,
+                "auxillary_file_paths": [
+                    "results\\OskarTestLow6\\AgentController\\AgentController-499965.pt"
+                ]
+            },
+            {
+                "steps": 999982,
+                "file_path": "results\\OskarTestLow6\\AgentController\\AgentController-999982.onnx",
+                "reward": null,
+                "creation_time": 1730846535.2805655,
+                "auxillary_file_paths": [
+                    "results\\OskarTestLow6\\AgentController\\AgentController-999982.pt"
+                ]
+            },
+            {
+                "steps": 1001198,
+                "file_path": "results\\OskarTestLow6\\AgentController\\AgentController-1001198.onnx",
+                "reward": null,
+                "creation_time": 1730846535.3801346,
+                "auxillary_file_paths": [
+                    "results\\OskarTestLow6\\AgentController\\AgentController-1001198.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1001198,
+            "file_path": "results\\OskarTestLow6\\AgentController.onnx",
+            "reward": null,
+            "creation_time": 1730846535.3801346,
+            "auxillary_file_paths": [
+                "results\\OskarTestLow6\\AgentController\\AgentController-1001198.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.4.1+cpu"
+    }
+}
