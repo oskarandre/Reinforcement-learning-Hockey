@@ -6,6 +6,8 @@ These methods enable the agents to continuously learn and optimize their strateg
 
 Created by [Oskar André](https://github.com/oskarandre/), [Kenton Larsson](https://github.com/KnetusL), [Gustav Andersson](https://github.com/Gusandersson)
 
+Video: https://youtu.be/ioIlWLB25G4?si=3gPQ1FS_oXgDvX93
+
 
 ## Installation
 
