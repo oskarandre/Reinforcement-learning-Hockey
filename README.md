@@ -4,6 +4,8 @@ This project uses Unity's mlAgents and reinforcement learning to train agents to
 The players are controlled by AI, trained with deep reinforcement learning (DRL) andProximal Policy Optimization (PPO). 
 These methods enable the agents to continuously learn and optimize their strategies, resulting in dynamic, adaptive gameplay that mimics human decision-making and teamwork.
 
+Created by [Oskar André](https://github.com/oskarandre/), [Kenton Larsson](https://github.com/KnetusL), [Gustav Andersson](https://github.com/Gusandersson)
+
 
 ## Installation
 
